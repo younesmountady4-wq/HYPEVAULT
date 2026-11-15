@@ -1,40 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-<title>HYPEVAULT Cart</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HYPEVAULT | Cart</title>
 <style>
-
-body{
-background:#0a0a0a;
-color:white;
-font-family:Arial;
-padding:40px;
-}
-
-.cart{
-background:#171717;
-padding:30px;
-border-radius:20px;
-max-width:600px;
-}
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+body{background:linear-gradient(180deg, #8c8c8c 0%, #4a4a4a 35%, #181818 100%);color:white;min-height:100vh;}
+header{position:fixed;width:100%;top:0;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;backdrop-filter:blur(20px);background:rgba(0,0,0,0.4);border-bottom:1px solid rgba(255,255,255,0.1);z-index:100;}
+header h2 a{font-size:26px;letter-spacing:2px;color:white;text-decoration:none;}
+nav{display:flex;gap:18px;flex-wrap:wrap;}
+nav a{text-decoration:none;color:white;font-weight:bold;font-size:15px;transition:0.3s;}
+nav a:hover, nav a.active{color:#ccc;text-decoration:underline;}
+.cart-section{padding:130px 8% 100px;max-width:800px;margin:0 auto;}
+.cart-section h1{font-size:45px;margin-bottom:30px;letter-spacing:3px;}
+.cart-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:18px 25px;border-radius:14px;margin-bottom:15px;}
+.remove-btn{background:#ff4d4d;color:white;border:none;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:bold;}
+.total-box{margin-top:30px;padding:25px;background:rgba(0,0,0,0.4);border-radius:16px;text-align:right;}
+.total-box h2{font-size:28px;margin-bottom:20px;}
+.checkout-btn{padding:16px 40px;background:white;color:black;border:none;border-radius:30px;font-weight:bold;font-size:16px;cursor:pointer;transition:0.3s;}
+.checkout-btn:hover{box-shadow:0 0 25px white;}
+.empty-msg{color:#ccc;font-size:18px;margin-bottom:20px;}
 </style>
-
 </head>
 <body>
 
-<h1>CART</h1>
+<header>
+  <h2><a href="index.html">HYPEVAULT</a></h2>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="hoodies.html">Hoodies</a>
+    <a href="jackets.html">Jackets</a>
+    <a href="bottoms.html">Bottoms</a>
+    <a href="cart.html" class="active" id="cartLink">Cart (0)</a>
+  </nav>
+</header>
 
-<a href="index.html">← Home</a>
+<section class="cart-section">
+  <h1>IL TUO VAULT</h1>
+  <div id="cartItems"></div>
+  <div class="total-box" id="totalBox" style="display:none;">
+    <h2 id="totalPrice">Totale: € 0</h2>
+    <button class="checkout-btn" onclick="checkout()">PROCEDI AL CHECKOUT</button>
+  </div>
+</section>
 
-<div class="cart">
+<script>
+  function renderCart() {
+    let cart = JSON.parse(localStorage.getItem('hypevault_cart')) || [];
+    document.getElementById('cartLink').innerText = 'Cart (' + cart.length + ')';
+    const container = document.getElementById('cartItems');
+    const totalBox = document.getElementById('totalBox');
 
-<h2>Your cart is empty.</h2>
+    if (cart.length === 0) {
+      container.innerHTML = '<p class="empty-msg">Il tuo carrello è vuoto. Esplora le collezioni per aggiungere capi.</p>';
+      totalBox.style.display = 'none';
+      return;
+    }
 
-<p>Add products to start shopping.</p>
+    let html = '';
+    let total = 0;
+    cart.forEach((item, index) => {
+      total += item.price;
+      html += `
+        <div class="cart-item">
+          <div>
+            <h3>${item.name}</h3>
+            <p style="color:#ccc;margin-top:4px;">€ ${item.price}</p>
+          </div>
+          <button class="remove-btn" onclick="removeItem(${index})">Rimuovi</button>
+        </div>
+      `;
+    });
 
-</div>
+    container.innerHTML = html;
+    document.getElementById('totalPrice').innerText = 'Totale: € ' + total;
+    totalBox.style.display = 'block';
+  }
 
+  function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem('hypevault_cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('hypevault_cart', JSON.stringify(cart));
+    renderCart();
+  }
+
+  function checkout() {
+    alert('Ordine confermato! Grazie per aver acquistato su HYPEVAULT.');
+    localStorage.removeItem('hypevault_cart');
+    renderCart();
+  }
+
+  renderCart();
+</script>
 </body>
 </html>
