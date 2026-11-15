@@ -3,206 +3,316 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HYPEVAULT - Enter the Vault</title>
-
+<title>HYPEVAULT | Vintage & Streetwear Archive</title>
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: 'Segoe UI', Arial, sans-serif;
-}
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background: #080808;
+    color: #f5f5f5;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    overflow-x: hidden;
+  }
+  /* Barra di navigazione */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(12, 12, 12, 0.95);
+    border-bottom: 1px solid #1f1f1f;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #fff;
+    text-decoration: none;
+  }
+  .logo span {
+    color: #00ff88;
+  }
+  .nav-links {
+    display: flex;
+    gap: 25px;
+  }
+  .nav-links a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+  }
+  .nav-links a:hover {
+    color: #00ff88;
+  }
 
-body{
-  background: #0a0a0a;
-  color: white;
-  overflow-x: hidden;
-}
+  /* Sezione Hero Principale */
+  .hero {
+    min-height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #080808 75%);
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .tag-vintage {
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-size: 64px;
+    letter-spacing: 5px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    text-shadow: 0 0 25px rgba(0, 255, 136, 0.25);
+  }
+  .subtitle {
+    color: #999;
+    font-size: 16px;
+    max-width: 500px;
+    margin-bottom: 35px;
+    line-height: 1.5;
+  }
 
-body.locked {
-  overflow: hidden;
-}
+  /* Box Iscrizione */
+  .subscribe-box {
+    background: #111;
+    border: 1px solid #262626;
+    padding: 25px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  }
+  .subscribe-box h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+  }
+  .form-row {
+    display: flex;
+    gap: 10px;
+  }
+  input[type="email"] {
+    flex: 1;
+    padding: 12px 16px;
+    background: #080808;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+  }
+  input[type="email"]:focus {
+    border-color: #00ff88;
+  }
+  .btn-neon {
+    padding: 12px 20px;
+    background: #00ff88;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-weight: 800;
+    cursor: pointer;
+    font-size: 13px;
+    text-transform: uppercase;
+    transition: 0.3s;
+  }
+  .btn-neon:hover {
+    background: #00cc6a;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+  }
+  #msg-ok {
+    display: none;
+    color: #00ff88;
+    font-size: 13px;
+    margin-top: 12px;
+    font-weight: bold;
+  }
 
-/* SCHERMATA CASSAFORTE */
-.intro{
-  height: 100vh;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  background: #111;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  perspective: 1200px;
-  cursor: pointer;
-  transition: opacity 0.8s ease 1.3s, visibility 0.8s ease 1.3s;
-}
+  /* Sezione Vetrina Vintage */
+  .archive-section {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
+  }
+  .section-title {
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    border-left: 4px solid #00ff88;
+    padding-left: 15px;
+    text-transform: uppercase;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+  }
+  .card {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 14px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.3s;
+  }
+  .card:hover {
+    border-color: #444;
+    transform: translateY(-4px);
+  }
+  .era {
+    font-size: 11px;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .card h4 {
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+  .price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #00ff88;
+    margin-bottom: 15px;
+  }
+  .sold-tag {
+    display: inline-block;
+    background: #ff2a55;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: fit-content;
+  }
+  .restock-note {
+    font-size: 12px;
+    color: #aaa;
+    background: #181818;
+    padding: 8px;
+    border-radius: 6px;
+    border-left: 2px solid #ff2a55;
+  }
+  .card-link {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background: #1c1c1c;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  .card-link:hover {
+    background: #00ff88;
+    color: black;
+  }
+</style>
+</head>
+<body>
 
-.intro.opened {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
+  <!-- Menu collegato alle tue pagine -->
+  <nav>
+    <a href="index.html" class="logo">HYPE<span>VAULT</span></a>
+    <div class="nav-links">
+      <a href="hoodies.html">Hoodies</a>
+      <a href="jackets.html">Jackets</a>
+      <a href="bottoms.html">Bottoms</a>
+      <a href="cart.html">Cart 🛒</a>
+    </div>
+  </nav>
 
-/* SPORTELLO DELLA CASSAFORTE */
-.vault-door {
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #8a8a8a, #3a3a3a, #1a1a1a);
-  border: 12px solid #d4d4d4;
-  box-shadow: 0 0 40px rgba(0,0,0,0.9), inset 0 0 20px rgba(0,0,0,0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  transform-origin: left center;
-  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.6s, box-shadow 0.3s;
-}
+  <!-- Hero + Iscrizione -->
+  <section class="hero">
+    <div class="tag-vintage">Curated 90s & Y2K Archive</div>
+    <h1>HYPEVAULT</h1>
+    <p class="subtitle">Capi vintage selezionati, pezzi unici e archivio streetwear. Entra nel Vault prima che vadano sold out.</p>
 
-.intro:hover .vault-door {
-  box-shadow: 0 0 35px rgba(255,255,255,0.4), inset 0 0 20px rgba(0,0,0,0.8);
-}
+    <div class="subscribe-box">
+      <h3>🔒 ACCESSO ANTICIPATO AI DROP</h3>
+      <div class="form-row" id="form-container">
+        <input type="email" id="user-email" placeholder="La tua email...">
+        <button class="btn-neon" onclick="iscriviti()">Iscriviti</button>
+      </div>
+      <p id="msg-ok">✅ Sei dentro! Riceverai una mail al prossimo restock vintage.</p>
+    </div>
+  </section>
 
-.intro.opened .vault-door {
-  transform: rotateY(-105deg);
-}
+  <!-- Anteprima Pezzi Vintage -->
+  <section class="archive-section">
+    <h2 class="section-title">Archive Highlights</h2>
+    <div class="grid">
+      
+      <div class="card">
+        <div>
+          <div class="era">Vintage 1998 • 1 of 1</div>
+          <h4>Carhartt Distressed Work Jacket</h4>
+          <div class="price">145€</div>
+        </div>
+        <a href="jackets.html" class="card-link">Vedi in Jackets →</a>
+      </div>
 
-/* CHIAVISTELLI */
-.bolt {
-  position: absolute;
-  width: 35px;
-  height: 16px;
-  background: linear-gradient(180deg, #ffffff, #888888);
-  border-radius: 3px;
-  transition: transform 0.4s ease 0.3s;
-}
-.bolt.right-top { right: -18px; top: 30%; }
-.bolt.right-bottom { right: -18px; bottom: 30%; }
+      <div class="card">
+        <div>
+          <span class="sold-tag">VENDUTO / SOLD OUT</span>
+          <div class="era">Archive 2002 • Rare</div>
+          <h4>Boxy Faded Heavy Hoodie</h4>
+          <div class="price" style="text-decoration: line-through; color: #666;">110€</div>
+        </div>
+        <div class="restock-note">⏳ Pezzo venduto. Un nuovo restock simile tornerà disponibile tra poco!</div>
+      </div>
 
-.intro.opened .bolt {
-  transform: translateX(-20px);
-}
+      <div class="card">
+        <div>
+          <div class="era">Y2K Era • Baggy Fit</div>
+          <h4>Vintage Parachute Cargo Pants</h4>
+          <div class="price">95€</div>
+        </div>
+        <a href="bottoms.html" class="card-link">Vedi in Bottoms →</a>
+      </div>
 
-/* RUOTA CENTRALE */
-.wheel {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  border: 8px solid #e0e0e0;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.6);
-  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
+    </div>
+  </section>
 
-.spoke {
-  position: absolute;
-  width: 100%;
-  height: 8px;
-  background: #e0e0e0;
-}
-.spoke:nth-child(2) { transform: rotate(60deg); }
-.spoke:nth-child(3) { transform: rotate(120deg); }
+  <script>
+    function iscriviti() {
+      const email = document.getElementById("user-email").value;
+      if (email.includes("@") && email.trim() !== "") {
+        document.getElementById("form-container").style.display = "none";
+        document.getElementById("msg-ok").style.display = "block";
+      } else {
+        alert("Inserisci un indirizzo email valido per iscriverti!");
+      }
+    }
+  </script>
 
-.wheel-center {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #fff, #777);
-  z-index: 2;
-}
-
-.intro.opened .wheel {
-  transform: rotate(360deg);
-}
-
-.logo-intro{
-  font-size: 55px;
-  font-weight: 900;
-  margin-top: 35px;
-  letter-spacing: 5px;
-  background: linear-gradient(45deg, #ffffff, #a0a0a0, #ffffff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: opacity 0.5s ease;
-}
-
-.click-hint {
-  margin-top: 15px;
-  font-size: 14px;
-  letter-spacing: 3px;
-  color: #aaa;
-  text-transform: uppercase;
-  animation: pulse 1.5s infinite;
-}
-
-.intro.opened .logo-intro,
-.intro.opened .click-hint {
-  opacity: 0;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
-/* NAVBAR */
-header{
-  position: fixed;
-  width: 100%;
-  top: 0;
-  padding: 20px 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  backdrop-filter: blur(20px);
-  background: rgba(0,0,0,0.5);
-  z-index: 100;
-}
-
-header h2{
-  font-size: 26px;
-  letter-spacing: 2px;
-}
-
-nav a{
-  text-decoration: none;
-  color: white;
-  margin-left: 25px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-nav a:hover{
-  color: #00ff88;
-}
-
-/* HERO */
-.hero{
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  padding: 0 20px;
-  background: linear-gradient(180deg, #1c1c1c 0%, #0a0a0a 100%);
-}
-
-.hero h1{
-  font-size: clamp(40px, 8vw, 90px);
-  letter-spacing: 6px;
-  color: #fff;
-  text-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
-}
-
-.hero p{
-  font-size: 18px;
-  color: #aaa;
-  margin: 10px 0
+</body>
+</html>
