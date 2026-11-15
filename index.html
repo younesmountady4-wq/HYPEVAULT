@@ -41,6 +41,7 @@
   .nav-links {
     display: flex;
     gap: 25px;
+    align-items: center;
   }
   .nav-links a {
     color: #aaa;
@@ -54,16 +55,69 @@
   .nav-links a:hover {
     color: #00ff88;
   }
+  .cart-badge {
+    background: #00ff88;
+    color: #000;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 900;
+    margin-left: 4px;
+  }
+
+  /* Sezione Lookbook con le 3 foto all'inizio */
+  .lookbook-hero {
+    max-width: 1200px;
+    margin: 30px auto 10px;
+    padding: 0 20px;
+  }
+  .lookbook-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .lookbook-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid #222;
+    background: #111;
+    aspect-ratio: 3 / 4;
+  }
+  .lookbook-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .lookbook-item:hover img {
+    transform: scale(1.04);
+  }
+  .look-tag {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    background: rgba(8, 8, 8, 0.85);
+    color: #00ff88;
+    border: 1px solid rgba(0, 255, 136, 0.35);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
 
   /* Sezione Hero Principale */
   .hero {
-    min-height: 75vh;
+    min-height: 55vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 60px 20px;
+    padding: 50px 20px;
     background: radial-gradient(circle at center, #1a1a1a 0%, #080808 75%);
     border-bottom: 1px solid #1a1a1a;
   }
@@ -150,20 +204,162 @@
     font-weight: bold;
   }
 
-  /* Sezione Vetrina Vintage */
+  /* Sezioni Prodotti e Sconti */
   .archive-section {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 60px auto;
     padding: 0 20px;
+  }
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
   }
   .section-title {
     font-size: 24px;
     letter-spacing: 2px;
-    margin-bottom: 30px;
     border-left: 4px solid #00ff88;
     padding-left: 15px;
     text-transform: uppercase;
   }
+  .discount-pill {
+    background: rgba(0, 255, 136, 0.15);
+    color: #00ff88;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+
+  /* Griglia 4 Prodotti in Sconto */
+  .sale-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 22px;
+  }
+  .sale-card {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.3s;
+  }
+  .sale-card:hover {
+    border-color: #00ff88;
+    transform: translateY(-4px);
+  }
+  .sale-img-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #1a1a1a;
+    overflow: hidden;
+  }
+  .sale-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .badge-discount {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #00ff88;
+    color: #000;
+    font-weight: 900;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+  .badge-sold {
+    display: none;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #ff2a55;
+    color: #fff;
+    font-weight: 900;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+  .sale-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+  }
+  .era {
+    font-size: 11px;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+  }
+  .sale-info h4 {
+    font-size: 17px;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .price-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .old-price {
+    color: #666;
+    text-decoration: line-through;
+    font-size: 14px;
+  }
+  .new-price {
+    color: #00ff88;
+    font-size: 20px;
+    font-weight: 800;
+  }
+  .btn-buy {
+    width: 100%;
+    padding: 11px;
+    background: #1e1e1e;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.25s;
+  }
+  .btn-buy:hover:not(:disabled) {
+    background: #00ff88;
+    color: #000;
+    border-color: #00ff88;
+  }
+  .btn-buy:disabled {
+    background: #181818;
+    color: #666;
+    border-color: #222;
+    cursor: not-allowed;
+  }
+  .restock-msg {
+    display: none;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #ff6b88;
+    background: rgba(255, 42, 85, 0.1);
+    padding: 8px;
+    border-radius: 6px;
+    border-left: 2px solid #ff2a55;
+  }
+
+  /* Griglia Archive Highlights */
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -182,13 +378,6 @@
   .card:hover {
     border-color: #444;
     transform: translateY(-4px);
-  }
-  .era {
-    font-size: 11px;
-    color: #777;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 8px;
   }
   .card h4 {
     font-size: 19px;
@@ -235,6 +424,77 @@
     background: #00ff88;
     color: black;
   }
+
+  /* Footer strutturato a colonne in basso */
+  footer {
+    border-top: 1px solid #1f1f1f;
+    background: #0a0a0a;
+    padding: 60px 40px 30px;
+    margin-top: 80px;
+    font-size: 13px;
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) auto;
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+  .footer-col h4 {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .footer-col ul {
+    list-style: none;
+  }
+  .footer-col ul li {
+    margin-bottom: 12px;
+  }
+  .footer-col ul li a {
+    color: #888;
+    text-decoration: none;
+    transition: 0.2s;
+  }
+  .footer-col ul li a:hover {
+    color: #00ff88;
+  }
+  .location {
+    color: #888;
+    font-weight: 600;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .footer-bottom {
+    border-top: 1px solid #1a1a1a;
+    padding-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    color: #666;
+    font-size: 12px;
+  }
+  .footer-bottom a {
+    color: #666;
+    text-decoration: none;
+    transition: 0.2s;
+  }
+  .footer-bottom a:hover {
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .lookbook-grid { grid-template-columns: 1fr; }
+    .footer-cols { grid-template-columns: 1fr 1fr; }
+    h1 { font-size: 42px; }
+  }
 </style>
 </head>
 <body>
@@ -246,9 +506,27 @@
       <a href="hoodies.html">Hoodies</a>
       <a href="jackets.html">Jackets</a>
       <a href="bottoms.html">Bottoms</a>
-      <a href="cart.html">Cart 🛒</a>
+      <a href="cart.html">Cart 🛒 <span class="cart-badge" id="cart-count">0</span></a>
     </div>
   </nav>
+
+  <!-- Le 3 foto all'inizio -->
+  <section class="lookbook-hero">
+    <div class="lookbook-grid">
+      <div class="lookbook-item">
+        <img src="outfit1.jpg" alt="Outfit Streetwear 1">
+        <span class="look-tag">Look 01 • Graphic Zip & Baggy</span>
+      </div>
+      <div class="lookbook-item">
+        <img src="outfit2.jpg" alt="Outfit Vintage 2">
+        <span class="look-tag">Look 02 • 90s Windbreaker</span>
+      </div>
+      <div class="lookbook-item">
+        <img src="outfit3.jpg" alt="Outfit Track 3">
+        <span class="look-tag">Look 03 • Retro Track Top</span>
+      </div>
+    </div>
+  </section>
 
   <!-- Hero + Iscrizione -->
   <section class="hero">
@@ -266,9 +544,111 @@
     </div>
   </section>
 
+  <!-- NUOVA SEZIONE: Prodotti Vintage in Sconto -->
+  <section class="archive-section">
+    <div class="section-header">
+      <h2 class="section-title">Vintage Archive Sale</h2>
+      <span class="discount-pill">FINO AL -35%</span>
+    </div>
+
+    <div class="sale-grid">
+      <!-- Prodotto Sconto 1 -->
+      <div class="sale-card">
+        <div class="sale-img-wrap">
+          <span class="badge-discount">-30%</span>
+          <span class="badge-sold" id="sold-1">SOLD OUT</span>
+          <img src="sconto1.jpg" alt="Navy 3-Stripes Track Pants">
+        </div>
+        <div class="sale-info">
+          <div>
+            <div class="era">90s Nylon • Taglia L</div>
+            <h4>Navy 3-Stripes Track Pants</h4>
+            <div class="price-row">
+              <span class="old-price">75€</span>
+              <span class="new-price">52€</span>
+            </div>
+          </div>
+          <div>
+            <button class="btn-buy" id="btn-1" onclick="acquistaProdotto(1)">Acquista ora</button>
+            <div class="restock-msg" id="restock-1">⏳ Venduto! Tornerà disponibile tra poco.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prodotto Sconto 2 -->
+      <div class="sale-card">
+        <div class="sale-img-wrap">
+          <span class="badge-discount">-25%</span>
+          <span class="badge-sold" id="sold-2">SOLD OUT</span>
+          <img src="sconto2.jpg" alt="Y2K Piping Baggy Track Pants">
+        </div>
+        <div class="sale-info">
+          <div>
+            <div class="era">Y2K Fit • Taglia M</div>
+            <h4>Piping Baggy Track Pants</h4>
+            <div class="price-row">
+              <span class="old-price">85€</span>
+              <span class="new-price">64€</span>
+            </div>
+          </div>
+          <div>
+            <button class="btn-buy" id="btn-2" onclick="acquistaProdotto(2)">Acquista ora</button>
+            <div class="restock-msg" id="restock-2">⏳ Venduto! Tornerà disponibile tra poco.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prodotto Sconto 3 -->
+      <div class="sale-card">
+        <div class="sale-img-wrap">
+          <span class="badge-discount">-35%</span>
+          <span class="badge-sold" id="sold-3">SOLD OUT</span>
+          <img src="sconto3.jpg" alt="90s Cobalt Windbreaker">
+        </div>
+        <div class="sale-info">
+          <div>
+            <div class="era">Archive 1994 • Taglia XL</div>
+            <h4>Cobalt & Aqua Colorblock Jacket</h4>
+            <div class="price-row">
+              <span class="old-price">130€</span>
+              <span class="new-price">85€</span>
+            </div>
+          </div>
+          <div>
+            <button class="btn-buy" id="btn-3" onclick="acquistaProdotto(3)">Acquista ora</button>
+            <div class="restock-msg" id="restock-3">⏳ Venduto! Tornerà disponibile tra poco.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prodotto Sconto 4 -->
+      <div class="sale-card">
+        <div class="sale-img-wrap">
+          <span class="badge-discount">-30%</span>
+          <span class="badge-sold" id="sold-4">SOLD OUT</span>
+          <img src="sconto4.jpg" alt="Sports & Fitness Purple Track Jacket">
+        </div>
+        <div class="sale-info">
+          <div>
+            <div class="era">Rare 90s • Taglia L</div>
+            <h4>Purple & Teal Retro Track Jacket</h4>
+            <div class="price-row">
+              <span class="old-price">140€</span>
+              <span class="new-price">98€</span>
+            </div>
+          </div>
+          <div>
+            <button class="btn-buy" id="btn-4" onclick="acquistaProdotto(4)">Acquista ora</button>
+            <div class="restock-msg" id="restock-4">⏳ Venduto! Tornerà disponibile tra poco.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Anteprima Pezzi Vintage -->
   <section class="archive-section">
-    <h2 class="section-title">Archive Highlights</h2>
+    <h2 class="section-title" style="margin-bottom: 30px;">Archive Highlights</h2>
     <div class="grid">
       
       <div class="card">
@@ -302,7 +682,69 @@
     </div>
   </section>
 
+  <!-- Footer a colonne in basso -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Risorse</h4>
+          <ul>
+            <li><a href="#">Archivio Drop</a></li>
+            <li><a href="#">Diventa Member</a></li>
+            <li><a href="#">Guida alle taglie vintage</a></li>
+            <li><a href="#">Autenticità capi</a></li>
+            <li><a href="#">Feedback</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Assistenza</h4>
+          <ul>
+            <li><a href="#">Assistenza clienti</a></li>
+            <li><a href="#">Stato ordine</a></li>
+            <li><a href="#">Spedizione e consegna</a></li>
+            <li><a href="#">Resi</a></li>
+            <li><a href="#">Opzioni di pagamento</a></li>
+            <li><a href="#">Contattaci</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Azienda</h4>
+          <ul>
+            <li><a href="#">Informazioni su HypeVault</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Sostenibilità e riuso</a></li>
+            <li><a href="#">Progetto Scolastico 2026</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Sconto Community</h4>
+          <ul>
+            <li><a href="#">Studenti e studentesse</a></li>
+            <li><a href="#">Personale docente</a></li>
+          </ul>
+        </div>
+
+        <div class="location">
+          <span>🌐 Italia</span>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 HypeVault, Inc. Tutti i diritti riservati.</span>
+        <a href="#">Guide</a>
+        <a href="#">Condizioni d'uso</a>
+        <a href="#">Condizioni di vendita</a>
+        <a href="#">Informativa sulla privacy e sui cookie</a>
+      </div>
+    </div>
+  </footer>
+
   <script>
+    let articoliNelCarrello = 0;
+
     function iscriviti() {
       const email = document.getElementById("user-email").value;
       if (email.includes("@") && email.trim() !== "") {
@@ -311,6 +753,20 @@
       } else {
         alert("Inserisci un indirizzo email valido per iscriverti!");
       }
+    }
+
+    function acquistaProdotto(id) {
+      // Segna il capo come venduto
+      document.getElementById("sold-" + id).style.display = "inline-block";
+      document.getElementById("restock-" + id).style.display = "block";
+      
+      const btn = document.getElementById("btn-" + id);
+      btn.innerText = "VENDUTO";
+      btn.disabled = true;
+
+      // Aggiorna contatore carrello
+      articoliNelCarrello++;
+      document.getElementById("cart-count").innerText = articoliNelCarrello;
     }
   </script>
 
