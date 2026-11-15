@@ -10,38 +10,37 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:'Arial', sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 body{
-  background:linear-gradient(180deg, #9c9c9c 0%, #5d5d5d 30%, #232323 100%);
-  color:white;
-  overflow-x:hidden;
+  background: linear-gradient(180deg, #9c9c9c 0%, #5d5d5d 30%, #232323 100%);
+  color: white;
+  overflow-x: hidden;
 }
 
-/* BLOCCA LO SCROLL FINCHÉ LA CASSAFORTE È CHIUSA */
 body.locked {
   overflow: hidden;
 }
 
-/* INTRO CASSAFORTE INTERATTIVA */
+/* SCHERMATA CASSAFORTE */
 .intro{
-  height:100vh;
-  width:100%;
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:999;
-  background:#111;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  perspective: 1200px; /* Serve per l'effetto apertura 3D */
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background: #111;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px;
+  cursor: pointer; /* Rende cliccabile tutta la schermata */
   transition: opacity 0.8s ease 1.3s, visibility 0.8s ease 1.3s;
 }
 
-/* Quando viene cliccata, l'intro sparisce dopo l'apertura della porta */
 .intro.opened {
   opacity: 0;
   visibility: hidden;
@@ -50,8 +49,8 @@ body.locked {
 
 /* SPORTELLO DELLA CASSAFORTE */
 .vault-door {
-  width: 280px;
-  height: 280px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
   background: radial-gradient(circle, #8a8a8a, #3a3a3a, #1a1a1a);
   border: 12px solid #d4d4d4;
@@ -60,21 +59,19 @@ body.locked {
   justify-content: center;
   align-items: center;
   position: relative;
-  cursor: pointer;
-  transform-origin: left center; /* Cerniera a sinistra per aprirsi come una porta */
+  transform-origin: left center;
   transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.6s, box-shadow 0.3s;
 }
 
-.vault-door:hover {
+.intro:hover .vault-door {
   box-shadow: 0 0 35px rgba(255,255,255,0.4), inset 0 0 20px rgba(0,0,0,0.8);
 }
 
-/* Animazione apertura porta al clic */
 .intro.opened .vault-door {
   transform: rotateY(-105deg);
 }
 
-/* CHIAVISTELLI LATERALI */
+/* CHIAVISTELLI */
 .bolt {
   position: absolute;
   width: 35px;
@@ -86,15 +83,14 @@ body.locked {
 .bolt.right-top { right: -18px; top: 30%; }
 .bolt.right-bottom { right: -18px; bottom: 30%; }
 
-/* I chiavistelli rientrano prima che la porta si apra */
 .intro.opened .bolt {
   transform: translateX(-20px);
 }
 
-/* VOLANTINO / RUOTA CENTRALE */
+/* RUOTA CENTRALE */
 .wheel {
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   border: 8px solid #e0e0e0;
   position: relative;
@@ -105,7 +101,6 @@ body.locked {
   transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-/* Raggi del volantino */
 .spoke {
   position: absolute;
   width: 100%;
@@ -116,26 +111,25 @@ body.locked {
 .spoke:nth-child(3) { transform: rotate(120deg); }
 
 .wheel-center {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: radial-gradient(circle, #fff, #777);
   z-index: 2;
 }
 
-/* La ruota gira al clic */
 .intro.opened .wheel {
   transform: rotate(360deg);
 }
 
 .logo-intro{
-  font-size:65px;
-  font-weight:900;
-  margin-top:35px;
+  font-size: 55px;
+  font-weight: 900;
+  margin-top: 35px;
   letter-spacing: 5px;
-  background:linear-gradient(45deg, #ffffff, #a0a0a0, #ffffff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  background: linear-gradient(45deg, #ffffff, #a0a0a0, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   transition: opacity 0.5s ease;
 }
 
@@ -160,86 +154,86 @@ body.locked {
 
 /* NAVBAR */
 header{
-  position:fixed;
-  width:100%;
-  top:0;
-  padding:20px 60px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  backdrop-filter:blur(20px);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(20px);
   background: rgba(0,0,0,0.2);
-  z-index:100;
+  z-index: 100;
 }
 
 header h2{
-  font-size:30px;
+  font-size: 30px;
   letter-spacing: 2px;
 }
 
 nav a{
-  text-decoration:none;
-  color:white;
-  margin-left:25px;
-  font-weight:bold;
+  text-decoration: none;
+  color: white;
+  margin-left: 25px;
+  font-weight: bold;
   transition: 0.3s;
 }
 
 nav a:hover{
-  color:silver;
+  color: silver;
 }
 
 /* HERO */
 .hero{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
   padding: 0 20px;
 }
 
 .hero h1{
   font-size: clamp(50px, 10vw, 120px);
-  letter-spacing:8px;
+  letter-spacing: 8px;
 }
 
 .hero p{
-  font-size:22px;
-  color:#e0e0e0;
-  margin-top:10px;
+  font-size: 22px;
+  color: #e0e0e0;
+  margin-top: 10px;
 }
 
 .btn{
-  margin-top:30px;
-  padding:18px 40px;
-  background:white;
-  color:black;
-  border-radius:40px;
-  text-decoration:none;
-  font-weight:bold;
-  transition:0.4s;
+  margin-top: 30px;
+  padding: 18px 40px;
+  background: white;
+  color: black;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.4s;
 }
 
 .btn:hover{
-  transform:translateY(-5px);
-  box-shadow:0 0 30px white;
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px white;
 }
 
-/* TRENDING / PRODUCTS */
+/* PRODOTTI */
 .products{
-  padding:100px 10%;
+  padding: 100px 10%;
 }
 
 .products h2{
-  font-size:50px;
-  margin-bottom:40px;
+  font-size: 50px;
+  margin-bottom: 40px;
   letter-spacing: 2px;
 }
 
 .grid{
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
 }
@@ -288,9 +282,9 @@ nav a:hover{
 
 <body class="locked">
 
-<!-- SCHERMATA CASSAFORTE -->
-<div class="intro" id="vaultScreen">
-  <div class="vault-door" id="vaultDoor" title="Clicca per aprire">
+<!-- SCHERMATA CASSAFORTE CON ONCLICK DIRETTO -->
+<div class="intro" id="vaultScreen" onclick="apriCassaforte()">
+  <div class="vault-door">
     <div class="bolt right-top"></div>
     <div class="bolt right-bottom"></div>
     
@@ -303,10 +297,10 @@ nav a:hover{
   </div>
   
   <div class="logo-intro">HYPEVAULT</div>
-  <div class="click-hint">Clicca sulla cassaforte per entrare</div>
+  <div class="click-hint">Tocca ovunque per aprire</div>
 </div>
 
-<!-- CONTENUTO DEL SITO -->
+<!-- SITO -->
 <header>
   <h2>HYPEVAULT</h2>
   <nav>
@@ -343,21 +337,16 @@ nav a:hover{
   </div>
 </section>
 
-<!-- SCRIPT PER L'APERTURA AL CLIC -->
 <script>
-  const vaultDoor = document.getElementById('vaultDoor');
-  const vaultScreen = document.getElementById('vaultScreen');
-
-  vaultDoor.addEventListener('click', () => {
-    // Attiva l'animazione di apertura
-    vaultScreen.classList.add('opened');
-    
-    // Sblocca lo scroll della pagina dopo che la porta si è aperta
-    setTimeout(() => {
+  function apriCassaforte() {
+    var screen = document.getElementById('vaultScreen');
+    screen.classList.add('opened');
+    setTimeout(function() {
       document.body.classList.remove('locked');
     }, 1300);
-  });
+  }
 </script>
 
 </body>
 </html>
+
