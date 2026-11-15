@@ -3,160 +3,188 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HYPEVAULT | Vintage & Streetwear Archive</title>
+<title>HYPEVAULT | Vintage Archive</title>
 <style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  body {
-    background: #080808;
-    color: #f5f5f5;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    overflow-x: hidden;
-  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #080808; color: #f5f5f5; font-family: Arial, sans-serif; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 30px; background: #111; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 10; }
+  .logo { font-size: 22px; font-weight: 900; letter-spacing: 2px; color: #fff; text-decoration: none; }
+  .logo span { color: #00ff88; }
+  .nav-links { display: flex; gap: 20px; align-items: center; }
+  .nav-links a { color: #bbb; text-decoration: none; font-size: 13px; font-weight: bold; text-transform: uppercase; }
+  .nav-links a:hover { color: #00ff88; }
+  .badge-cart { background: #00ff88; color: #000; padding: 2px 7px; border-radius: 10px; font-size: 12px; }
 
-  /* =========================================
-     PORTA BLINDATA CAVEAU (VAULT ENTRY)
-     ========================================= */
-  #vault-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
-  }
-  #vault-overlay.opened {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-bottom: 50px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; margin-bottom: 50px; }
 
-  /* Due ante scorrevoli d'acciaio dietro la porta rotonda */
-  .vault-wall {
-    position: absolute;
-    top: 0;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(135deg, #1b1d20 0%, #0e0f11 50%, #17191c 100%);
-    border-right: 2px solid #2b2e33;
-    box-shadow: inset 0 0 80px rgba(0,0,0,0.9);
-    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1) 0.6s;
-  }
-  .vault-wall.left {
-    left: 0;
-    background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 2px, transparent 2px, transparent 6px), linear-gradient(135deg, #1e2024, #0c0d0f);
-  }
-  .vault-wall.right {
-    right: 0;
-    border-right: none;
-    border-left: 2px solid #2b2e33;
-    background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 2px, transparent 2px, transparent 6px), linear-gradient(225deg, #1e2024, #0c0d0f);
-  }
-  #vault-overlay.unlocking .vault-wall.left {
-    transform: translateX(-100%);
-  }
-  #vault-overlay.unlocking .vault-wall.right {
-    transform: translateX(100%);
-  }
+  .look-card { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid #222; height: 340px; }
+  .look-card img { width: 100%; height: 100%; object-fit: cover; }
+  .look-label { position: absolute; bottom: 12px; left: 12px; background: rgba(0,0,0,0.85); color: #00ff88; padding: 5px 12px; border-radius: 15px; font-size: 11px; font-weight: bold; }
 
-  /* La mega porta circolare in acciaio */
-  .vault-door {
-    position: relative;
-    z-index: 2;
-    width: 380px;
-    height: 380px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #4a4e54 0%, #23262b 45%, #111315 85%, #070809 100%);
-    border: 14px solid #2f333a;
-    box-shadow:
-      0 0 0 6px #121316,
-      0 25px 70px rgba(0, 0, 0, 0.95),
-      inset 0 4px 15px rgba(255, 255, 255, 0.25),
-      inset 0 -10px 25px rgba(0, 0, 0, 0.9);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1) 0.6s, opacity 0.8s ease 0.8s;
-  }
-  #vault-overlay.unlocking .vault-door {
-    transform: scale(1.15);
-    opacity: 0;
-  }
+  .hero { text-align: center; padding: 50px 20px; background: #111; border: 1px solid #222; border-radius: 16px; margin-bottom: 50px; }
+  .hero h1 { font-size: 46px; letter-spacing: 4px; margin-bottom: 10px; }
+  .hero p { color: #999; margin-bottom: 25px; }
+  .sub-form { display: flex; justify-content: center; gap: 10px; max-width: 400px; margin: 0 auto; }
+  .sub-form input { flex: 1; padding: 12px; background: #080808; border: 1px solid #333; border-radius: 8px; color: #fff; }
+  .btn-neon { padding: 12px 20px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
-  /* Anello interno con rivetti metallici */
-  .vault-ring {
-    position: absolute;
-    inset: 18px;
-    border-radius: 50%;
-    border: 3px dashed rgba(255, 255, 255, 0.18);
-    box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.85);
-    pointer-events: none;
-  }
+  .title-sec { font-size: 22px; border-left: 4px solid #00ff88; padding-left: 12px; margin-bottom: 25px; text-transform: uppercase; }
+  .card { background: #111; border: 1px solid #222; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+  .card-img { position: relative; height: 220px; background: #1a1a1a; }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; }
+  .tag-sconto { position: absolute; top: 10px; left: 10px; background: #00ff88; color: #000; font-weight: bold; font-size: 11px; padding: 3px 8px; border-radius: 5px; }
+  .tag-sold { display: none; position: absolute; top: 10px; right: 10px; background: #ff2a55; color: #fff; font-weight: bold; font-size: 11px; padding: 3px 8px; border-radius: 5px; }
+  .card-body { padding: 18px; }
+  .card-body h4 { margin-bottom: 8px; font-size: 16px; }
+  .price-box { margin-bottom: 14px; }
+  .old { text-decoration: line-through; color: #666; font-size: 13px; margin-right: 8px; }
+  .new { color: #00ff88; font-weight: bold; font-size: 18px; }
+  .btn-buy { width: 100%; padding: 10px; background: #1e1e1e; color: #fff; border: 1px solid #333; border-radius: 6px; font-weight: bold; cursor: pointer; }
+  .btn-buy:hover:not(:disabled) { background: #00ff88; color: #000; }
+  .btn-buy:disabled { opacity: 0.5; cursor: not-allowed; }
+  .restock { display: none; font-size: 12px; color: #ff6b88; margin-top: 8px; }
 
-  /* Cerniere pesanti laterali */
-  .vault-hinge {
-    position: absolute;
-    right: -36px;
-    width: 44px;
-    height: 55px;
-    background: linear-gradient(180deg, #3c4047, #181a1d);
-    border: 2px solid #4e535c;
-    border-radius: 6px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.8);
-  }
-  .vault-hinge.top { top: 75px; }
-  .vault-hinge.bottom { bottom: 75px; }
+  footer { border-top: 1px solid #222; padding: 40px 20px; margin-top: 40px; color: #777; font-size: 13px; }
+  .f-grid { max-width: 1100px; margin: 0 auto 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
+  .f-grid h4 { color: #fff; margin-bottom: 12px; text-transform: uppercase; font-size: 12px; }
+  .f-grid p { margin-bottom: 8px; }
+  .f-bottom { max-width: 1100px; margin: 0 auto; border-top: 1px solid #1a1a1a; padding-top: 20px; font-size: 12px; }
+</style>
+</head>
+<body>
 
-  /* Display digitale sul caveau */
-  .vault-screen {
-    background: #050a07;
-    border: 2px solid #2c3531;
-    padding: 6px 16px;
-    border-radius: 6px;
-    color: #00ff88;
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-shadow: 0 0 8px #00ff88;
-    margin-bottom: 18px;
-    box-shadow: inset 0 0 10px rgba(0, 255, 136, 0.2);
-  }
+  <nav>
+    <a href="index.html" class="logo">HYPE<span>VAULT</span></a>
+    <div class="nav-links">
+      <a href="hoodies.html">Hoodies</a>
+      <a href="jackets.html">Jackets</a>
+      <a href="bottoms.html">Bottoms</a>
+      <a href="cart.html">Cart 🛒 <span class="badge-cart" id="cart-num">0</span></a>
+    </div>
+  </nav>
 
-  /* Timone / Manovella centrale rotante */
-  .vault-wheel {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 12px solid #6b717a;
-    background: radial-gradient(circle, #3c4047 0%, #1a1c20 100%);
-    box-shadow:
-      0 8px 20px rgba(0,0,0,0.85),
-      inset 0 2px 6px rgba(255,255,255,0.4);
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  .vault-wheel:hover {
-    border-color: #00ff88;
-    box-shadow: 0 0 25px rgba(0, 255, 136, 0.35), inset 0 2px 6px rgba(255,255,255,0.4);
-  }
-  #vault-overlay.unlocking .vault-wheel {
-    transform: rotate(360deg);
-  }
+  <div class="container">
+    <!-- Lookbook iniziale -->
+    <div class="grid-3">
+      <div class="look-card">
+        <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=600" alt="Look 1">
+        <span class="look-label">LOOK 01 • ARCHIVE ZIP</span>
+      </div>
+      <div class="look-card">
+        <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=600" alt="Look 2">
+        <span class="look-label">LOOK 02 • 90S STREET</span>
+      </div>
+      <div class="look-card">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600" alt="Look 3">
+        <span class="look-label">LOOK 03 • VINTAGE FIT</span>
+      </div>
+    </div>
 
-  /* Raggi del timone */
-  .spoke {
-    position: absolute;
-    width: 100%;
-    height: 10px;
-    background: linear
+    <!-- Hero + Iscrizione -->
+    <div class="hero">
+      <h1>HYPEVAULT</h1>
+      <p>Archivio Streetwear & Vintage 90s/Y2K. Iscriviti per accedere ai drop esclusivi.</p>
+      <div class="sub-form" id="box-form">
+        <input type="email" id="email-in" placeholder="Inserisci la tua email...">
+        <button class="btn-neon" onclick="iscrivi()">Iscriviti</button>
+      </div>
+      <p id="ok-msg" style="display:none; color:#00ff88; font-weight:bold; margin-top:10px;">✅ Iscrizione completata! Sei nel Vault.</p>
+    </div>
+
+    <!-- Prodotti in sconto -->
+    <h2 class="title-sec">Vintage Sale • Fino al -35%</h2>
+    <div class="grid-4">
+      <div class="card">
+        <div class="card-img">
+          <span class="tag-sconto">-30%</span>
+          <span class="tag-sold" id="s1">SOLD OUT</span>
+          <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500" alt="Prodotto 1">
+        </div>
+        <div class="card-body">
+          <h4>Navy 3-Stripes Track Pants</h4>
+          <div class="price-box"><span class="old">75€</span><span class="new">52€</span></div>
+          <button class="btn-buy" id="b1" onclick="compra(1)">Acquista ora</button>
+          <div class="restock" id="r1">⏳ Venduto! Tornerà disponibile tra poco.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">
+          <span class="tag-sconto">-25%</span>
+          <span class="tag-sold" id="s2">SOLD OUT</span>
+          <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500" alt="Prodotto 2">
+        </div>
+        <div class="card-body">
+          <h4>Piping Baggy Track Pants</h4>
+          <div class="price-box"><span class="old">85€</span><span class="new">64€</span></div>
+          <button class="btn-buy" id="b2" onclick="compra(2)">Acquista ora</button>
+          <div class="restock" id="r2">⏳ Venduto! Tornerà disponibile tra poco.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">
+          <span class="tag-sconto">-35%</span>
+          <span class="tag-sold" id="s3">SOLD OUT</span>
+          <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500" alt="Prodotto 3">
+        </div>
+        <div class="card-body">
+          <h4>Cobalt Colorblock Windbreaker</h4>
+          <div class="price-box"><span class="old">130€</span><span class="new">85€</span></div>
+          <button class="btn-buy" id="b3" onclick="compra(3)">Acquista ora</button>
+          <div class="restock" id="r3">⏳ Venduto! Tornerà disponibile tra poco.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img">
+          <span class="tag-sconto">-30%</span>
+          <span class="tag-sold" id="s4">SOLD OUT</span>
+          <img src="https://images.unsplash.com/photo-1544441893-675973e31985?w=500" alt="Prodotto 4">
+        </div>
+        <div class="card-body">
+          <h4>Purple Retro Track Jacket</h4>
+          <div class="price-box"><span class="old">140€</span><span class="new">98€</span></div>
+          <button class="btn-buy" id="b4" onclick="compra(4)">Acquista ora</button>
+          <div class="restock" id="r4">⏳ Venduto! Tornerà disponibile tra poco.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="f-grid">
+      <div><h4>Risorse</h4><p>Archivio Drop</p><p>Diventa Member</p><p>Guida Taglie</p></div>
+      <div><h4>Assistenza</h4><p>Spedizioni</p><p>Resi</p><p>Contattaci</p></div>
+      <div><h4>Azienda</h4><p>Info HypeVault</p><p>Progetto Scolastico 2026</p></div>
+      <div><h4>Community</h4><p>Sconto Studenti</p><p>🌐 Italia</p></div>
+    </div>
+    <div class="f-bottom">© 2026 HypeVault, Inc. Tutti i diritti riservati. • Condizioni d'uso • Privacy</div>
+  </footer>
+
+  <script>
+    let cart = 0;
+    function iscrivi() {
+      let e = document.getElementById("email-in").value;
+      if (e.includes("@")) {
+        document.getElementById("box-form").style.display = "none";
+        document.getElementById("ok-msg").style.display = "block";
+      } else {
+        alert("Inserisci un'email valida!");
+      }
+    }
+    function compra(id) {
+      document.getElementById("s" + id).style.display = "block";
+      document.getElementById("r" + id).style.display = "block";
+      let btn = document.getElementById("b" + id);
+      btn.innerText = "VENDUTO";
+      btn.disabled = true;
+      cart++;
+      document.getElementById("cart-num").innerText = cart;
+    }
+  </script>
+
+</body>
+</html>
