@@ -6,86 +6,95 @@
 <title>HYPEVAULT | Vintage Archive</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #080808; color: #f5f5f5; font-family: Arial, sans-serif; }
+  body { background: #080808; color: #f5f5f5; font-family: 'Segoe UI', Arial, sans-serif; }
+  
   nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 30px; background: #111; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 10; }
   .logo { font-size: 22px; font-weight: 900; letter-spacing: 2px; color: #fff; text-decoration: none; }
   .logo span { color: #00ff88; }
   .nav-links { display: flex; gap: 20px; align-items: center; }
   .nav-links a { color: #bbb; text-decoration: none; font-size: 13px; font-weight: bold; text-transform: uppercase; }
   .nav-links a:hover { color: #00ff88; }
-  .badge-cart { background: #00ff88; color: #000; padding: 2px 7px; border-radius: 10px; font-size: 12px; }
+  .badge-cart { background: #00ff88; color: #000; padding: 2px 7px; border-radius: 10px; font-size: 12px; font-weight: bold; }
 
   .container { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
 
-  /* EFFETTO CASSAFORTE CIRCOLARE */
-  .vault-hero {
-    text-align: center;
-    padding: 60px 20px;
-    background: radial-gradient(circle, #1c1c1c 0%, #0a0a0a 80%);
-    border-bottom: 2px solid #222;
-    margin-bottom: 40px;
-  }
-  .vault-wheel {
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    border: 6px solid #333;
-    border-top: 6px solid #00ff88;
-    border-bottom: 6px solid #00ff88;
-    margin: 0 auto 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 25px rgba(0,255,136,0.2);
-    animation: spinVault 15s linear infinite;
-  }
-  .vault-inner-circle {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background: #111;
-    border: 2px solid #444;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 14px;
-    letter-spacing: 1px;
-    color: #00ff88;
-  }
-  @keyframes spinVault {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+  /* CASSAFORTE CIRCOLARE */
+  .vault-hero { text-align: center; padding: 50px 20px; background: radial-gradient(circle, #1c1c1c 0%, #0a0a0a 80%); border-bottom: 2px solid #222; margin-bottom: 40px; }
+  .vault-wheel { width: 140px; height: 140px; border-radius: 50%; border: 6px solid #333; border-top: 6px solid #00ff88; border-bottom: 6px solid #00ff88; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(0,255,136,0.2); animation: spinVault 12s linear infinite; }
+  .vault-inner { width: 96px; height: 96px; border-radius: 50%; background: #111; border: 2px solid #444; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; color: #00ff88; }
+  @keyframes spinVault { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-  .vault-hero h1 { font-size: 46px; letter-spacing: 5px; margin-bottom: 10px; }
-  .vault-hero p { color: #999; margin-bottom: 25px; }
+  .vault-hero h1 { font-size: 42px; letter-spacing: 4px; margin-bottom: 10px; text-transform: uppercase; }
+  .vault-hero p { color: #999; margin-bottom: 20px; font-size: 14px; }
   
-  .sub-form { display: flex; justify-content: center; gap: 10px; max-width: 400px; margin: 0 auto; }
-  .sub-form input { flex: 1; padding: 12px; background: #080808; border: 1px solid #333; border-radius: 8px; color: #fff; }
-  .btn-neon { padding: 12px 20px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+  .sub-form { display: flex; justify-content: center; gap: 10px; max-width: 380px; margin: 0 auto; }
+  .sub-form input { flex: 1; padding: 10px 14px; background: #080808; border: 1px solid #333; border-radius: 8px; color: #fff; font-size: 13px; outline: none; }
+  .btn-neon { padding: 10px 18px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 13px; text-transform: uppercase; }
+  .btn-neon:hover { background: #00cc6a; }
 
-  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-bottom: 50px; }
-  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; margin-bottom: 50px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-bottom: 40px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; margin-bottom: 40px; }
 
-  .look-card { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid #222; height: 340px; }
+  .look-card { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid #222; height: 300px; background: #111; }
   .look-card img { width: 100%; height: 100%; object-fit: cover; }
   .look-label { position: absolute; bottom: 12px; left: 12px; background: rgba(0,0,0,0.85); color: #00ff88; padding: 5px 12px; border-radius: 15px; font-size: 11px; font-weight: bold; }
 
-  .title-sec { font-size: 22px; border-left: 4px solid #00ff88; padding-left: 12px; margin-bottom: 25px; text-transform: uppercase; }
+  .title-sec { font-size: 20px; border-left: 4px solid #00ff88; padding-left: 12px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+  
   .card { background: #111; border: 1px solid #222; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
-  .card-img { position: relative; height: 220px; background: #1a1a1a; }
+  .card-img { position: relative; height: 210px; background: #1a1a1a; }
   .card-img img { width: 100%; height: 100%; object-fit: cover; }
   .tag-sconto { position: absolute; top: 10px; left: 10px; background: #00ff88; color: #000; font-weight: bold; font-size: 11px; padding: 3px 8px; border-radius: 5px; }
   .tag-sold { display: none; position: absolute; top: 10px; right: 10px; background: #ff2a55; color: #fff; font-weight: bold; font-size: 11px; padding: 3px 8px; border-radius: 5px; }
-  .card-body { padding: 18px; }
-  .card-body h4 { margin-bottom: 8px; font-size: 16px; }
-  .price-box { margin-bottom: 14px; }
+  .card-body { padding: 16px; }
+  .card-body h4 { margin-bottom: 8px; font-size: 15px; }
+  .price-box { margin-bottom: 12px; }
   .old { text-decoration: line-through; color: #666; font-size: 13px; margin-right: 8px; }
-  .new { color: #00ff88; font-weight: bold; font-size: 18px; }
-  .btn-buy { width: 100%; padding: 10px; background: #1e1e1e; color: #fff; border: 1px solid #333; border-radius: 6px; font-weight: bold; cursor: pointer; }
+  .new { color: #00ff88; font-weight: bold; font-size: 17px; }
+  .btn-buy { width: 100%; padding: 10px; background: #1e1e1e; color: #fff; border: 1px solid #333; border-radius: 6px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; }
   .btn-buy:hover:not(:disabled) { background: #00ff88; color: #000; }
-  .btn-buy:disabled { opacity: 0.5; cursor: not-allowed; }
-  .restock { display: none; font-size: 12px; color: #ff6b88; margin-top: 8px; }
+  .btn-buy:disabled { background: #181818; color: #666; border-color: #222; cursor: not-allowed; }
+  .restock { display: none; font-size: 11px; color: #ff6b88; margin-top: 8px; background: rgba(255,42,85,0.08); padding: 6px; border-radius: 4px; border-left: 2px solid #ff2a55; }
 
-  footer { border-top: 1px solid #222; padding: 40px 20px; margin-top: 40px;
+  footer { border-top: 1px solid #222; padding: 40px 20px; margin-top: 40px; color: #777; font-size: 13px; background: #0a0a0a; }
+  .f-grid { max-width: 1100px; margin: 0 auto 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
+  .f-grid h4 { color: #fff; margin-bottom: 12px; text-transform: uppercase; font-size: 12px; }
+  .f-grid p { margin-bottom: 8px; }
+  .f-bottom { max-width: 1100px; margin: 0 auto; border-top: 1px solid #1a1a1a; padding-top: 20px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">HYPE<span>VAULT</span></a>
+    <div class="nav-links">
+      <a href="hoodies.html">Hoodies</a>
+      <a href="jackets.html">Jackets</a>
+      <a href="bottoms.html">Bottoms</a>
+      <a href="cart.html">Cart 🛒 <span class="badge-cart" id="cart-num">0</span></a>
+    </div>
+  </nav>
+
+  <!-- CASSAFORTE CIRCOLARE IN APERTURA -->
+  <div class="vault-hero">
+    <div class="vault-wheel">
+      <div class="vault-inner">VAULT</div>
+    </div>
+    <h1>HYPEVAULT</h1>
+    <p>Archivio Streetwear & Vintage 90s/Y2K. Inserisci la mail per sbloccare l'accesso al caveau.</p>
+    <div class="sub-form" id="box-form">
+      <input type="email" id="email-in" placeholder="La tua email...">
+      <button class="btn-neon" onclick="iscrivi()">Sblocca</button>
+    </div>
+    <p id="ok-msg" style="display:none; color:#00ff88; font-weight:bold; margin-top:10px; font-size:13px;">🔒 Caveau sbloccato! Benvenuto nel Vault.</p>
+  </div>
+
+  <div class="container">
+    <!-- Lookbook iniziale -->
+    <div class="grid-3">
+      <div class="look-card">
+        <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=600" alt="Look 1">
+        <span class="look-label">LOOK 01 • ARCHIVE ZIP</span>
+      </div>
+      <div class="look-card">
+        <img src="
