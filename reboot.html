@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HYPEVAULT - Shop</title>
+<style>
+  body {
+    background: #0a0a0a;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .prodotto {
+    background: #161616;
+    border: 1px solid #333;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    width: 300px;
+  }
+  .badge-venduto {
+    display: none;
+    background: #ff2a55;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .avviso-restock {
+    display: none;
+    color: #00ff88;
+    font-size: 14px;
+    margin-top: 15px;
+  }
+  button {
+    padding: 12px 25px;
+    background: #00ff88;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  button:disabled {
+    background: #444;
+    color: #888;
+    cursor: not-allowed;
+  }
+</style>
+</head>
+<body>
+
+<div class="prodotto">
+  <span id="badge" class="badge-venduto">VENDUTO / SOLD OUT</span>
+  <h2>Felpa HypeVault</h2>
+  <p id="prezzo">120€</p>
+  
+  <button id="btn-acquista" onclick="segnaVenduto()">ACQUISTA ORA</button>
+  
+  <p id="messaggio-restock" class="avviso-restock">
+    ⏳ Questo articolo è esaurito, ma tornerà disponibile tra poco!
+  </p>
+</div>
+
+<script>
+  function segnaVenduto() {
+    // Mostra l'etichetta "VENDUTO"
+    document.getElementById("badge").style.display = "inline-block";
+    // Mostra la scritta che tornerà tra poco
+    document.getElementById("messaggio-restock").style.display = "block";
+    // Disattiva il pulsante e cambia il testo
+    let btn = document.getElementById("btn-acquista");
+    btn.innerText = "ESAURITO";
+    btn.disabled = true;
+    // Sbarra il prezzo
+    document.getElementById("prezzo").style.textDecoration = "line-through";
+  }
+</script>
+
+</body>
+</html>
