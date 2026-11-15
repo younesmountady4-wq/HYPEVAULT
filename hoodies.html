@@ -1,45 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-<title>HYPEVAULT - Hoodies</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HYPEVAULT | Hoodies</title>
 <style>
-body{
-background:#0a0a0a;
-color:white;
-font-family:Arial;
-padding:40px;
-}
-.card{
-background:#171717;
-padding:20px;
-margin:20px;
-border-radius:15px;
-}
-a{
-color:#00ff88;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+body{background:linear-gradient(180deg, #8c8c8c 0%, #4a4a4a 35%, #181818 100%);color:white;min-height:100vh;}
+header{position:fixed;width:100%;top:0;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;backdrop-filter:blur(20px);background:rgba(0,0,0,0.4);border-bottom:1px solid rgba(255,255,255,0.1);z-index:100;}
+header h2 a{font-size:26px;letter-spacing:2px;color:white;text-decoration:none;}
+nav{display:flex;gap:18px;flex-wrap:wrap;}
+nav a{text-decoration:none;color:white;font-weight:bold;font-size:15px;transition:0.3s;}
+nav a:hover, nav a.active{color:#ccc;text-decoration:underline;}
+.products{padding:130px 8% 100px;}
+.products h1{font-size:45px;margin-bottom:10px;letter-spacing:3px;}
+.products p.sub{color:#ddd;margin-bottom:40px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:25px;}
+.card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:18px;padding:22px;text-align:center;backdrop-filter:blur(10px);transition:0.3s;}
+.card:hover{transform:translateY(-8px);background:rgba(255,255,255,0.12);}
+.card-img{width:100%;height:220px;background:#222;border-radius:12px;margin-bottom:18px;display:flex;justify-content:center;align-items:center;color:#777;font-weight:bold;}
+.card h3{font-size:20px;margin-bottom:8px;}
+.card p{color:#ccc;font-size:18px;font-weight:bold;margin-bottom:15px;}
+.add-btn{padding:10px 22px;background:white;color:black;border:none;border-radius:25px;font-weight:bold;cursor:pointer;transition:0.3s;width:100%;}
+.add-btn:hover{background:#ddd;}
 </style>
 </head>
 <body>
 
-<h1>HYPEVAULT HOODIES</h1>
+<header>
+  <h2><a href="index.html">HYPEVAULT</a></h2>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="hoodies.html" class="active">Hoodies</a>
+    <a href="jackets.html">Jackets</a>
+    <a href="bottoms.html">Bottoms</a>
+    <a href="cart.html" id="cartLink">Cart (0)</a>
+  </nav>
+</header>
 
-<a href="index.html">← Home</a>
+<section class="products">
+  <h1>HOODIES</h1>
+  <p class="sub">Cotone pesante 500GSM e vestibilità boxy.</p>
+  <div class="grid">
+    <div class="card">
+      <div class="card-img">HOODIE 01</div>
+      <h3>Vault Essential Hoodie</h3>
+      <p>€ 180</p>
+      <button class="add-btn" onclick="addToCart('Vault Essential Hoodie', 180)">Aggiungi al Carrello</button>
+    </div>
+    <div class="card">
+      <div class="card-img">HOODIE 02</div>
+      <h3>Silver Acid Wash Zip</h3>
+      <p>€ 210</p>
+      <button class="add-btn" onclick="addToCart('Silver Acid Wash Zip', 210)">Aggiungi al Carrello</button>
+    </div>
+    <div class="card">
+      <div class="card-img">HOODIE 03</div>
+      <h3>Steel Logo Pullover</h3>
+      <p>€ 195</p>
+      <button class="add-btn" onclick="addToCart('Steel Logo Pullover', 195)">Aggiungi al Carrello</button>
+    </div>
+  </div>
+</section>
 
-<div class="card">
-<h2>Corteiz Alcatraz Hoodie</h2>
-<p>€149</p>
-</div>
-
-<div class="card">
-<h2>Denim Tears Hoodie</h2>
-<p>€189</p>
-</div>
-
-<div class="card">
-<h2>Stüssy Hoodie</h2>
-<p>€119</p>
-</div>
-
+<script>
+  function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem('hypevault_cart')) || [];
+    document.getElementById('cartLink').innerText = 'Cart (' + cart.length + ')';
+  }
+  function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem('hypevault_cart')) || [];
+    cart.push({ name: name, price: price });
+    localStorage.setItem('hypevault_cart', JSON.stringify(cart));
+    updateCartCount();
+    alert(name + ' aggiunto al carrello!');
+  }
+  updateCartCount();
+</script>
 </body>
 </html>
+
