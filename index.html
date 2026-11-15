@@ -16,759 +16,147 @@
     font-family: 'Segoe UI', Arial, sans-serif;
     overflow-x: hidden;
   }
-  /* Barra di navigazione */
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    background: rgba(12, 12, 12, 0.95);
-    border-bottom: 1px solid #1f1f1f;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .logo {
-    font-size: 22px;
-    font-weight: 900;
-    letter-spacing: 3px;
-    color: #fff;
-    text-decoration: none;
-  }
-  .logo span {
-    color: #00ff88;
-  }
-  .nav-links {
-    display: flex;
-    gap: 25px;
-    align-items: center;
-  }
-  .nav-links a {
-    color: #aaa;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: 0.3s;
-  }
-  .nav-links a:hover {
-    color: #00ff88;
-  }
-  .cart-badge {
-    background: #00ff88;
-    color: #000;
-    padding: 2px 7px;
-    border-radius: 10px;
-    font-size: 12px;
-    font-weight: 900;
-    margin-left: 4px;
-  }
 
-  /* Sezione Lookbook con le 3 foto all'inizio */
-  .lookbook-hero {
-    max-width: 1200px;
-    margin: 30px auto 10px;
-    padding: 0 20px;
-  }
-  .lookbook-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-  .lookbook-item {
-    position: relative;
+  /* =========================================
+     PORTA BLINDATA CAVEAU (VAULT ENTRY)
+     ========================================= */
+  #vault-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
-    border-radius: 14px;
-    border: 1px solid #222;
-    background: #111;
-    aspect-ratio: 3 / 4;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
   }
-  .lookbook-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
-  }
-  .lookbook-item:hover img {
-    transform: scale(1.04);
-  }
-  .look-tag {
-    position: absolute;
-    bottom: 14px;
-    left: 14px;
-    background: rgba(8, 8, 8, 0.85);
-    color: #00ff88;
-    border: 1px solid rgba(0, 255, 136, 0.35);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+  #vault-overlay.opened {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
 
-  /* Sezione Hero Principale */
-  .hero {
-    min-height: 55vh;
+  /* Due ante scorrevoli d'acciaio dietro la porta rotonda */
+  .vault-wall {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(135deg, #1b1d20 0%, #0e0f11 50%, #17191c 100%);
+    border-right: 2px solid #2b2e33;
+    box-shadow: inset 0 0 80px rgba(0,0,0,0.9);
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1) 0.6s;
+  }
+  .vault-wall.left {
+    left: 0;
+    background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 2px, transparent 2px, transparent 6px), linear-gradient(135deg, #1e2024, #0c0d0f);
+  }
+  .vault-wall.right {
+    right: 0;
+    border-right: none;
+    border-left: 2px solid #2b2e33;
+    background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 2px, transparent 2px, transparent 6px), linear-gradient(225deg, #1e2024, #0c0d0f);
+  }
+  #vault-overlay.unlocking .vault-wall.left {
+    transform: translateX(-100%);
+  }
+  #vault-overlay.unlocking .vault-wall.right {
+    transform: translateX(100%);
+  }
+
+  /* La mega porta circolare in acciaio */
+  .vault-door {
+    position: relative;
+    z-index: 2;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #4a4e54 0%, #23262b 45%, #111315 85%, #070809 100%);
+    border: 14px solid #2f333a;
+    box-shadow:
+      0 0 0 6px #121316,
+      0 25px 70px rgba(0, 0, 0, 0.95),
+      inset 0 4px 15px rgba(255, 255, 255, 0.25),
+      inset 0 -10px 25px rgba(0, 0, 0, 0.9);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    padding: 50px 20px;
-    background: radial-gradient(circle at center, #1a1a1a 0%, #080808 75%);
-    border-bottom: 1px solid #1a1a1a;
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1) 0.6s, opacity 0.8s ease 0.8s;
   }
-  .tag-vintage {
-    background: rgba(0, 255, 136, 0.1);
-    color: #00ff88;
-    border: 1px solid rgba(0, 255, 136, 0.3);
+  #vault-overlay.unlocking .vault-door {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+
+  /* Anello interno con rivetti metallici */
+  .vault-ring {
+    position: absolute;
+    inset: 18px;
+    border-radius: 50%;
+    border: 3px dashed rgba(255, 255, 255, 0.18);
+    box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.85);
+    pointer-events: none;
+  }
+
+  /* Cerniere pesanti laterali */
+  .vault-hinge {
+    position: absolute;
+    right: -36px;
+    width: 44px;
+    height: 55px;
+    background: linear-gradient(180deg, #3c4047, #181a1d);
+    border: 2px solid #4e535c;
+    border-radius: 6px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.8);
+  }
+  .vault-hinge.top { top: 75px; }
+  .vault-hinge.bottom { bottom: 75px; }
+
+  /* Display digitale sul caveau */
+  .vault-screen {
+    background: #050a07;
+    border: 2px solid #2c3531;
     padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 12px;
+    border-radius: 6px;
+    color: #00ff88;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
     font-weight: bold;
     letter-spacing: 2px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-  }
-  h1 {
-    font-size: 64px;
-    letter-spacing: 5px;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    text-shadow: 0 0 25px rgba(0, 255, 136, 0.25);
-  }
-  .subtitle {
-    color: #999;
-    font-size: 16px;
-    max-width: 500px;
-    margin-bottom: 35px;
-    line-height: 1.5;
-  }
-
-  /* Box Iscrizione */
-  .subscribe-box {
-    background: #111;
-    border: 1px solid #262626;
-    padding: 25px;
-    border-radius: 16px;
-    width: 100%;
-    max-width: 440px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  }
-  .subscribe-box h3 {
-    font-size: 16px;
-    margin-bottom: 15px;
-    letter-spacing: 1px;
-  }
-  .form-row {
-    display: flex;
-    gap: 10px;
-  }
-  input[type="email"] {
-    flex: 1;
-    padding: 12px 16px;
-    background: #080808;
-    border: 1px solid #333;
-    border-radius: 8px;
-    color: white;
-    font-size: 14px;
-    outline: none;
-  }
-  input[type="email"]:focus {
-    border-color: #00ff88;
-  }
-  .btn-neon {
-    padding: 12px 20px;
-    background: #00ff88;
-    color: #000;
-    border: none;
-    border-radius: 8px;
-    font-weight: 800;
-    cursor: pointer;
-    font-size: 13px;
-    text-transform: uppercase;
-    transition: 0.3s;
-  }
-  .btn-neon:hover {
-    background: #00cc6a;
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
-  }
-  #msg-ok {
-    display: none;
-    color: #00ff88;
-    font-size: 13px;
-    margin-top: 12px;
-    font-weight: bold;
-  }
-
-  /* Sezioni Prodotti e Sconti */
-  .archive-section {
-    max-width: 1200px;
-    margin: 60px auto;
-    padding: 0 20px;
-  }
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-  }
-  .section-title {
-    font-size: 24px;
-    letter-spacing: 2px;
-    border-left: 4px solid #00ff88;
-    padding-left: 15px;
-    text-transform: uppercase;
-  }
-  .discount-pill {
-    background: rgba(0, 255, 136, 0.15);
-    color: #00ff88;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 1px;
-  }
-
-  /* Griglia 4 Prodotti in Sconto */
-  .sale-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 22px;
-  }
-  .sale-card {
-    background: #111;
-    border: 1px solid #222;
-    border-radius: 14px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: 0.3s;
-  }
-  .sale-card:hover {
-    border-color: #00ff88;
-    transform: translateY(-4px);
-  }
-  .sale-img-wrap {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background: #1a1a1a;
-    overflow: hidden;
-  }
-  .sale-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .badge-discount {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: #00ff88;
-    color: #000;
-    font-weight: 900;
-    font-size: 12px;
-    padding: 4px 10px;
-    border-radius: 6px;
-  }
-  .badge-sold {
-    display: none;
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: #ff2a55;
-    color: #fff;
-    font-weight: 900;
-    font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 6px;
-  }
-  .sale-info {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    justify-content: space-between;
-  }
-  .era {
-    font-size: 11px;
-    color: #777;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 6px;
-  }
-  .sale-info h4 {
-    font-size: 17px;
-    margin-bottom: 10px;
-    line-height: 1.3;
-  }
-  .price-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-  .old-price {
-    color: #666;
-    text-decoration: line-through;
-    font-size: 14px;
-  }
-  .new-price {
-    color: #00ff88;
-    font-size: 20px;
-    font-weight: 800;
-  }
-  .btn-buy {
-    width: 100%;
-    padding: 11px;
-    background: #1e1e1e;
-    color: #fff;
-    border: 1px solid #333;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 13px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: 0.25s;
-  }
-  .btn-buy:hover:not(:disabled) {
-    background: #00ff88;
-    color: #000;
-    border-color: #00ff88;
-  }
-  .btn-buy:disabled {
-    background: #181818;
-    color: #666;
-    border-color: #222;
-    cursor: not-allowed;
-  }
-  .restock-msg {
-    display: none;
-    margin-top: 10px;
-    font-size: 12px;
-    color: #ff6b88;
-    background: rgba(255, 42, 85, 0.1);
-    padding: 8px;
-    border-radius: 6px;
-    border-left: 2px solid #ff2a55;
-  }
-
-  /* Griglia Archive Highlights */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
-  }
-  .card {
-    background: #111;
-    border: 1px solid #222;
-    border-radius: 14px;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: 0.3s;
-  }
-  .card:hover {
-    border-color: #444;
-    transform: translateY(-4px);
-  }
-  .card h4 {
-    font-size: 19px;
-    margin-bottom: 10px;
-  }
-  .price {
-    font-size: 18px;
-    font-weight: bold;
-    color: #00ff88;
-    margin-bottom: 15px;
-  }
-  .sold-tag {
-    display: inline-block;
-    background: #ff2a55;
-    color: white;
-    font-size: 11px;
-    font-weight: bold;
-    padding: 4px 10px;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    width: fit-content;
-  }
-  .restock-note {
-    font-size: 12px;
-    color: #aaa;
-    background: #181818;
-    padding: 8px;
-    border-radius: 6px;
-    border-left: 2px solid #ff2a55;
-  }
-  .card-link {
-    display: block;
-    text-align: center;
-    padding: 10px;
-    background: #1c1c1c;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-  .card-link:hover {
-    background: #00ff88;
-    color: black;
-  }
-
-  /* Footer strutturato a colonne in basso */
-  footer {
-    border-top: 1px solid #1f1f1f;
-    background: #0a0a0a;
-    padding: 60px 40px 30px;
-    margin-top: 80px;
-    font-size: 13px;
-  }
-  .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .footer-cols {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr) auto;
-    gap: 30px;
-    margin-bottom: 50px;
-  }
-  .footer-col h4 {
-    font-size: 13px;
-    font-weight: 700;
+    text-shadow: 0 0 8px #00ff88;
     margin-bottom: 18px;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    box-shadow: inset 0 0 10px rgba(0, 255, 136, 0.2);
   }
-  .footer-col ul {
-    list-style: none;
-  }
-  .footer-col ul li {
-    margin-bottom: 12px;
-  }
-  .footer-col ul li a {
-    color: #888;
-    text-decoration: none;
-    transition: 0.2s;
-  }
-  .footer-col ul li a:hover {
-    color: #00ff88;
-  }
-  .location {
-    color: #888;
-    font-weight: 600;
+
+  /* Timone / Manovella centrale rotante */
+  .vault-wheel {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 12px solid #6b717a;
+    background: radial-gradient(circle, #3c4047 0%, #1a1c20 100%);
+    box-shadow:
+      0 8px 20px rgba(0,0,0,0.85),
+      inset 0 2px 6px rgba(255,255,255,0.4);
+    position: relative;
     display: flex;
-    align-items: flex-start;
-    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  .footer-bottom {
-    border-top: 1px solid #1a1a1a;
-    padding-top: 25px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    color: #666;
-    font-size: 12px;
+  .vault-wheel:hover {
+    border-color: #00ff88;
+    box-shadow: 0 0 25px rgba(0, 255, 136, 0.35), inset 0 2px 6px rgba(255,255,255,0.4);
   }
-  .footer-bottom a {
-    color: #666;
-    text-decoration: none;
-    transition: 0.2s;
-  }
-  .footer-bottom a:hover {
-    color: #fff;
+  #vault-overlay.unlocking .vault-wheel {
+    transform: rotate(360deg);
   }
 
-  @media (max-width: 768px) {
-    .lookbook-grid { grid-template-columns: 1fr; }
-    .footer-cols { grid-template-columns: 1fr 1fr; }
-    h1 { font-size: 42px; }
-  }
-</style>
-</head>
-<body>
-
-  <!-- Menu collegato alle tue pagine -->
-  <nav>
-    <a href="index.html" class="logo">HYPE<span>VAULT</span></a>
-    <div class="nav-links">
-      <a href="hoodies.html">Hoodies</a>
-      <a href="jackets.html">Jackets</a>
-      <a href="bottoms.html">Bottoms</a>
-      <a href="cart.html">Cart 🛒 <span class="cart-badge" id="cart-count">0</span></a>
-    </div>
-  </nav>
-
-  <!-- Le 3 foto all'inizio -->
-  <section class="lookbook-hero">
-    <div class="lookbook-grid">
-      <div class="lookbook-item">
-        <img src="outfit1.jpg" alt="Outfit Streetwear 1">
-        <span class="look-tag">Look 01 • Graphic Zip & Baggy</span>
-      </div>
-      <div class="lookbook-item">
-        <img src="outfit2.jpg" alt="Outfit Vintage 2">
-        <span class="look-tag">Look 02 • 90s Windbreaker</span>
-      </div>
-      <div class="lookbook-item">
-        <img src="outfit3.jpg" alt="Outfit Track 3">
-        <span class="look-tag">Look 03 • Retro Track Top</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Hero + Iscrizione -->
-  <section class="hero">
-    <div class="tag-vintage">Curated 90s & Y2K Archive</div>
-    <h1>HYPEVAULT</h1>
-    <p class="subtitle">Capi vintage selezionati, pezzi unici e archivio streetwear. Entra nel Vault prima che vadano sold out.</p>
-
-    <div class="subscribe-box">
-      <h3>🔒 ACCESSO ANTICIPATO AI DROP</h3>
-      <div class="form-row" id="form-container">
-        <input type="email" id="user-email" placeholder="La tua email...">
-        <button class="btn-neon" onclick="iscriviti()">Iscriviti</button>
-      </div>
-      <p id="msg-ok">✅ Sei dentro! Riceverai una mail al prossimo restock vintage.</p>
-    </div>
-  </section>
-
-  <!-- NUOVA SEZIONE: Prodotti Vintage in Sconto -->
-  <section class="archive-section">
-    <div class="section-header">
-      <h2 class="section-title">Vintage Archive Sale</h2>
-      <span class="discount-pill">FINO AL -35%</span>
-    </div>
-
-    <div class="sale-grid">
-      <!-- Prodotto Sconto 1 -->
-      <div class="sale-card">
-        <div class="sale-img-wrap">
-          <span class="badge-discount">-30%</span>
-          <span class="badge-sold" id="sold-1">SOLD OUT</span>
-          <img src="sconto1.jpg" alt="Navy 3-Stripes Track Pants">
-        </div>
-        <div class="sale-info">
-          <div>
-            <div class="era">90s Nylon • Taglia L</div>
-            <h4>Navy 3-Stripes Track Pants</h4>
-            <div class="price-row">
-              <span class="old-price">75€</span>
-              <span class="new-price">52€</span>
-            </div>
-          </div>
-          <div>
-            <button class="btn-buy" id="btn-1" onclick="acquistaProdotto(1)">Acquista ora</button>
-            <div class="restock-msg" id="restock-1">⏳ Venduto! Tornerà disponibile tra poco.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Prodotto Sconto 2 -->
-      <div class="sale-card">
-        <div class="sale-img-wrap">
-          <span class="badge-discount">-25%</span>
-          <span class="badge-sold" id="sold-2">SOLD OUT</span>
-          <img src="sconto2.jpg" alt="Y2K Piping Baggy Track Pants">
-        </div>
-        <div class="sale-info">
-          <div>
-            <div class="era">Y2K Fit • Taglia M</div>
-            <h4>Piping Baggy Track Pants</h4>
-            <div class="price-row">
-              <span class="old-price">85€</span>
-              <span class="new-price">64€</span>
-            </div>
-          </div>
-          <div>
-            <button class="btn-buy" id="btn-2" onclick="acquistaProdotto(2)">Acquista ora</button>
-            <div class="restock-msg" id="restock-2">⏳ Venduto! Tornerà disponibile tra poco.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Prodotto Sconto 3 -->
-      <div class="sale-card">
-        <div class="sale-img-wrap">
-          <span class="badge-discount">-35%</span>
-          <span class="badge-sold" id="sold-3">SOLD OUT</span>
-          <img src="sconto3.jpg" alt="90s Cobalt Windbreaker">
-        </div>
-        <div class="sale-info">
-          <div>
-            <div class="era">Archive 1994 • Taglia XL</div>
-            <h4>Cobalt & Aqua Colorblock Jacket</h4>
-            <div class="price-row">
-              <span class="old-price">130€</span>
-              <span class="new-price">85€</span>
-            </div>
-          </div>
-          <div>
-            <button class="btn-buy" id="btn-3" onclick="acquistaProdotto(3)">Acquista ora</button>
-            <div class="restock-msg" id="restock-3">⏳ Venduto! Tornerà disponibile tra poco.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Prodotto Sconto 4 -->
-      <div class="sale-card">
-        <div class="sale-img-wrap">
-          <span class="badge-discount">-30%</span>
-          <span class="badge-sold" id="sold-4">SOLD OUT</span>
-          <img src="sconto4.jpg" alt="Sports & Fitness Purple Track Jacket">
-        </div>
-        <div class="sale-info">
-          <div>
-            <div class="era">Rare 90s • Taglia L</div>
-            <h4>Purple & Teal Retro Track Jacket</h4>
-            <div class="price-row">
-              <span class="old-price">140€</span>
-              <span class="new-price">98€</span>
-            </div>
-          </div>
-          <div>
-            <button class="btn-buy" id="btn-4" onclick="acquistaProdotto(4)">Acquista ora</button>
-            <div class="restock-msg" id="restock-4">⏳ Venduto! Tornerà disponibile tra poco.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Anteprima Pezzi Vintage -->
-  <section class="archive-section">
-    <h2 class="section-title" style="margin-bottom: 30px;">Archive Highlights</h2>
-    <div class="grid">
-      
-      <div class="card">
-        <div>
-          <div class="era">Vintage 1998 • 1 of 1</div>
-          <h4>Carhartt Distressed Work Jacket</h4>
-          <div class="price">145€</div>
-        </div>
-        <a href="jackets.html" class="card-link">Vedi in Jackets →</a>
-      </div>
-
-      <div class="card">
-        <div>
-          <span class="sold-tag">VENDUTO / SOLD OUT</span>
-          <div class="era">Archive 2002 • Rare</div>
-          <h4>Boxy Faded Heavy Hoodie</h4>
-          <div class="price" style="text-decoration: line-through; color: #666;">110€</div>
-        </div>
-        <div class="restock-note">⏳ Pezzo venduto. Un nuovo restock simile tornerà disponibile tra poco!</div>
-      </div>
-
-      <div class="card">
-        <div>
-          <div class="era">Y2K Era • Baggy Fit</div>
-          <h4>Vintage Parachute Cargo Pants</h4>
-          <div class="price">95€</div>
-        </div>
-        <a href="bottoms.html" class="card-link">Vedi in Bottoms →</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Footer a colonne in basso -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-cols">
-        <div class="footer-col">
-          <h4>Risorse</h4>
-          <ul>
-            <li><a href="#">Archivio Drop</a></li>
-            <li><a href="#">Diventa Member</a></li>
-            <li><a href="#">Guida alle taglie vintage</a></li>
-            <li><a href="#">Autenticità capi</a></li>
-            <li><a href="#">Feedback</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4>Assistenza</h4>
-          <ul>
-            <li><a href="#">Assistenza clienti</a></li>
-            <li><a href="#">Stato ordine</a></li>
-            <li><a href="#">Spedizione e consegna</a></li>
-            <li><a href="#">Resi</a></li>
-            <li><a href="#">Opzioni di pagamento</a></li>
-            <li><a href="#">Contattaci</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4>Azienda</h4>
-          <ul>
-            <li><a href="#">Informazioni su HypeVault</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Sostenibilità e riuso</a></li>
-            <li><a href="#">Progetto Scolastico 2026</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4>Sconto Community</h4>
-          <ul>
-            <li><a href="#">Studenti e studentesse</a></li>
-            <li><a href="#">Personale docente</a></li>
-          </ul>
-        </div>
-
-        <div class="location">
-          <span>🌐 Italia</span>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <span>© 2026 HypeVault, Inc. Tutti i diritti riservati.</span>
-        <a href="#">Guide</a>
-        <a href="#">Condizioni d'uso</a>
-        <a href="#">Condizioni di vendita</a>
-        <a href="#">Informativa sulla privacy e sui cookie</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    let articoliNelCarrello = 0;
-
-    function iscriviti() {
-      const email = document.getElementById("user-email").value;
-      if (email.includes("@") && email.trim() !== "") {
-        document.getElementById("form-container").style.display = "none";
-        document.getElementById("msg-ok").style.display = "block";
-      } else {
-        alert("Inserisci un indirizzo email valido per iscriverti!");
-      }
-    }
-
-    function acquistaProdotto(id) {
-      // Segna il capo come venduto
-      document.getElementById("sold-" + id).style.display = "inline-block";
-      document.getElementById("restock-" + id).style.display = "block";
-      
-      const btn = document.getElementById("btn-" + id);
-      btn.innerText = "VENDUTO";
-      btn.disabled = true;
-
-      // Aggiorna contatore carrello
-      articoliNelCarrello++;
-      document.getElementById("cart-count").innerText = articoliNelCarrello;
-    }
-  </script>
-
-</body>
-</html>
+  /* Raggi del timone */
+  .spoke {
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    background: linear
