@@ -5,36 +5,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HYPEVAULT | Home</title>
 <style>
-  body { background: #070707; color: #fff; font-family: Arial, sans-serif; margin: 0; padding: 0; }
-  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: #111; border-bottom: 1px solid #222; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #070707; color: #fff; font-family: Arial, sans-serif; overflow-x: hidden; }
+  
+  /* Banner Promozionale in alto */
+  .promo-banner {
+    background: #00ff88;
+    color: #000;
+    text-align: center;
+    padding: 8px;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: #111; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
   .logo { font-size: 24px; font-weight: 900; color: #fff; text-decoration: none; }
   .logo span { color: #00ff88; }
   .nav-links a { color: #ccc; text-decoration: none; margin-left: 20px; font-weight: bold; font-size: 14px; text-transform: uppercase; }
   .nav-links a:hover { color: #00ff88; }
-  .hero { text-align: center; padding: 80px 20px; }
-  .hero h1 { font-size: 48px; color: #00ff88; margin-bottom: 10px; }
-  .hero p { color: #888; font-size: 18px; }
-  .btn { display: inline-block; margin-top: 20px; padding: 12px 30px; background: #00ff88; color: #000; font-weight: bold; text-decoration: none; border-radius: 6px; }
-</style>
-</head>
-<body>
+  
+  /* Sezione Hero Vault con atmosfera caveau */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 90px 20px;
+    background: linear-gradient(rgba(7, 7, 7, 0.85), rgba(7, 7, 7, 0.92)), 
+                url('https://images.pexels.com/photos/259200/pexels-photo-259200.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover no-repeat;
+    border-bottom: 2px solid #00ff88;
+    margin-bottom: 40px;
+  }
+  .hero h1 { font-size: 52px; color: #00ff88; margin-bottom: 10px; font-weight: 900; letter-spacing: 4px; text-shadow: 0 0 20px rgba(0,255,136,0.4); }
+  .hero p { color: #bbb; font-size: 16px; margin-bottom: 15px; }
+  
+  /* Evidenziazione promo e lingotti */
+  .promo-box {
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid #00ff88;
+    max-width: 650px;
+    margin: 0 auto 30px;
+    padding: 15px;
+    border-radius: 8px;
+    color: #00ff88;
+    font-weight: bold;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    box-shadow: inset 0 0 15px rgba(0,255,136,0.15);
+  }
 
-  <nav>
-    <a href="index.html" class="logo">HYPE<span>VAULT</span></a>
-    <div class="nav-links">
-      <a href="index.html" style="color:#00ff88;">Home</a>
-      <a href="hoodies.html">Hoodies</a>
-      <a href="jackets.html">Jackets</a>
-      <a href="bottoms.html">Bottoms</a>
-      <a href="cart.html">Cart</a>
-    </div>
-  </nav>
-
-  <div class="hero">
-    <h1>HYPEVAULT ARCHIVE</h1>
-    <p>Il tuo portale streetwear & vintage per il progetto scolastico.</p>
-    <a href="hoodies.html" class="btn">Esplora Collezioni</a>
-  </div>
-
-</body>
-</html>
+  /* Form Iscrizione Email */
+  .sub-container {
+    max
