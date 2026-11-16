@@ -197,3 +197,59 @@
       <button class="checkout-btn" onclick="checkout()">PROCEDI AL CHECKOUT</button>
     </div>
   </section>
+
+  <footer>
+    © 2026 HypeVault, Inc. • Progetto Scolastico • Archivio Vintage Streetwear
+  </footer>
+
+  <script>
+    function renderCart() {
+      let cart = JSON.parse(localStorage.getItem('hypevault_cart')) || [];
+      document.getElementById('cartLink').innerText = cart.length;
+      const container = document.getElementById('cartItems');
+      const totalBox = document.getElementById('totalBox');
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p class="empty-msg">Il tuo carrello è vuoto. Esplora le collezioni per aggiungere capi rari al Vault.</p>';
+        totalBox.style.display = 'none';
+        return;
+      }
+
+      let html = '';
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price;
+        html += `
+          <div class="cart-item">
+            <div>
+              <h3>${item.name}</h3>
+              <p style="color:#00ff88; font-weight:bold; margin-top:4px;">€ ${item.price}</p>
+            </div>
+            <button class="remove-btn" onclick="removeItem(${index})">Rimuovi</button>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+      document.getElementById('totalPrice').innerText = 'Totale: € ' + total;
+      totalBox.style.display = 'block';
+    }
+
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem('hypevault_cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('hypevault_cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function checkout() {
+      alert('Ordine confermato! Grazie per aver acquistato su HYPEVAULT.');
+      localStorage.removeItem('hypevault_cart');
+      renderCart();
+    }
+
+    renderCart();
+  </script>
+
+</body>
+</html>
