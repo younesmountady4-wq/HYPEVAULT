@@ -1,83 +1,127 @@
-VINTAGE</span>
-          <img src="https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Heavy Cargo Pants">
-        </div>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HYPEVAULT | Bottoms Archive</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #070707; color: #f5f5f5; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; }
+  .top-strip { background: #00ff88; color: #000; text-align: center; padding: 6px; font-size: 12px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 40px; background: rgba(12, 12, 12, 0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
+  .logo { font-size: 24px; font-weight: 900; letter-spacing: 3px; color: #fff; text-decoration: none; }
+  .logo span { color: #00ff88; }
+  .nav-links { display: flex; gap: 24px; align-items: center; }
+  .nav-links a { color: #ccc; text-decoration: none; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: #00ff88; }
+  .cart-pill { background: #00ff88; color: #000; padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: 900; }
+  .category-header { padding: 60px 20px 40px; text-align: center; background: radial-gradient(circle at center, #1a1a1a 0%, #070707 75%); border-bottom: 1px solid #222; }
+  .tag-era { display: inline-block; background: rgba(0, 255, 136, 0.1); color: #00ff88; border: 1px solid rgba(0, 255, 136, 0.3); padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+  .category-header h1 { font-size: 48px; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 10px; }
+  .category-header p { color: #999; max-width: 500px; margin: 0 auto; font-size: 15px; }
+  .main-wrap { max-width: 1200px; margin: 0 auto; padding: 50px 20px 80px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .card { background: #111; border: 1px solid #222; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
+  .card:hover { border-color: #00ff88; transform: translateY(-5px); }
+  .card-img { position: relative; height: 300px; background: #1a1a1a; }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .badge-vintage { position: absolute; top: 12px; left: 12px; background: rgba(10, 10, 10, 0.85); color: #00ff88; border: 1px solid rgba(0, 255, 136, 0.4); font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 6px; }
+  .badge-sold { display: none; position: absolute; top: 12px; right: 12px; background: #ff2a55; color: #fff; font-size: 11px; font-weight: 900; padding: 4px 10px; border-radius: 6px; }
+  .card-body { padding: 20px; display: flex; flex-direction: column; flex: 1; justify-content: space-between; }
+  .era-sub { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .card-body h3 { font-size: 18px; margin-bottom: 10px; }
+  .price { color: #00ff88; font-size: 20px; font-weight: 800; margin-bottom: 16px; }
+  .add-btn { width: 100%; padding: 12px; background: #1e1e1e; color: #fff; border: 1px solid #333; border-radius: 8px; font-weight: 700; font-size: 13px; text-transform: uppercase; cursor: pointer; transition: 0.2s; }
+  .add-btn:hover:not(:disabled) { background: #00ff88; color: #000; border-color: #00ff88; }
+  .add-btn:disabled { background: #181818; color: #666; border-color: #222; cursor: not-allowed; }
+  .restock-note { display: none; font-size: 12px; color: #ff6b88; background: rgba(255, 42, 85, 0.1); padding: 8px; border-radius: 6px; border-left: 3px solid #ff2a55; margin-top: 10px; }
+  footer { border-top: 1px solid #222; background: #0b0b0b; padding: 40px 20px; text-align: center; color: #666; font-size: 12px; }
+</style>
+</head>
+<body>
+  <div class="top-strip">Archivio Vintage • Pezzi Unici 90s & Y2K</div>
+  <nav>
+    <a href="index.html" class="logo">HYPE<span>VAULT</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="hoodies.html">Hoodies</a>
+      <a href="jackets.html">Jackets</a>
+      <a href="bottoms.html" class="active">Bottoms</a>
+      <a href="cart.html">Cart 🛒 <span class="cart-pill" id="cart-count">0</span></a>
+    </div>
+  </nav>
+  <section class="category-header">
+    <div class="tag-era">Archive Collection</div>
+    <h1>BOTTOMS</h1>
+    <p>Cargo multi-tasca, denim baggy anni '90 e track pants vintage selezionati.</p>
+  </section>
+  <div class="main-wrap">
+    <div class="grid">
+      <div class="card">
+        <div class="card-img"><span class="badge-vintage">1 OF 1 VINTAGE</span><span class="badge-sold" id="sold-1">SOLD OUT</span><img src="https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Cargo"></div>
         <div class="card-body">
           <div>
             <div class="era-sub">90s Utility • Taglia 32</div>
             <h3>Heavy Parachute Cargo Pants</h3>
             <div class="price">110,00 €</div>
           </div>
-          <button class="add-btn" onclick="addToCart('Heavy Parachute Cargo Pants', 110, this)">Aggiungi al Carrello</button>
+          <div>
+            <button class="add-btn" id="btn-1" onclick="addToCart('Heavy Parachute Cargo Pants', 110, 1)">Aggiungi al Carrello</button>
+            <div class="restock-note" id="msg-1">⏳ Pezzo venduto. Un restock simile tornerà disponibile tra poco.</div>
+          </div>
         </div>
       </div>
-
-      <!-- Prodotto 2 -->
       <div class="card">
-        <div class="card-img">
-          <span class="badge-vintage">Y2K ARCHIVE</span>
-          <img src="https://images.pexels.com/photos/6311392/pexels-photo-6311392.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Distressed Baggy Denim">
-        </div>
+        <div class="card-img"><span class="badge-vintage">Y2K ARCHIVE</span><span class="badge-sold" id="sold-2">SOLD OUT</span><img src="https://images.pexels.com/photos/6311392/pexels-photo-6311392.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Denim"></div>
         <div class="card-body">
           <div>
             <div class="era-sub">Washed Denim • Taglia 34</div>
             <h3>Distressed Baggy Denim</h3>
             <div class="price">135,00 €</div>
           </div>
-          <button class="add-btn" onclick="addToCart('Distressed Baggy Denim', 135, this)">Aggiungi al Carrello</button>
+          <div>
+            <button class="add-btn" id="btn-2" onclick="addToCart('Distressed Baggy Denim', 135, 2)">Aggiungi al Carrello</button>
+            <div class="restock-note" id="msg-2">⏳ Pezzo venduto. Un restock simile tornerà disponibile tra poco.</div>
+          </div>
         </div>
       </div>
-
-      <!-- Prodotto 3 -->
       <div class="card">
-        <div class="card-img">
-          <span class="badge-vintage">RARE 1998</span>
-          <span class="badge-sold">SOLD OUT</span>
-          <img src="https://images.pexels.com/photos/52518/jeans-pants-blue-shop-52518.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vault Wide Denim">
-        </div>
+        <div class="card-img"><span class="badge-vintage">RARE 1998</span><span class="badge-sold" id="sold-3">SOLD OUT</span><img src="https://images.pexels.com/photos/52518/jeans-pants-blue-shop-52518.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Sweatpants"></div>
         <div class="card-body">
           <div>
             <div class="era-sub">Heavyweight • Taglia L</div>
             <h3>Vault Wide Vintage Denim</h3>
-            <div class="price" style="text-decoration: line-through; color: #666;">95,00 €</div>
+            <div class="price">95,00 €</div>
           </div>
           <div>
-            <button class="add-btn" disabled>Venduto</button>
-            <div class="restock-note">⏳ Pezzo venduto. Un restock simile tornerà disponibile tra poco.</div>
+            <button class="add-btn" id="btn-3" onclick="addToCart('Vault Wide Vintage Denim', 95, 3)">Aggiungi al Carrello</button>
+            <div class="restock-note" id="msg-3">⏳ Pezzo venduto. Un restock simile tornerà disponibile tra poco.</div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
-
   <footer>
     © 2026 HypeVault, Inc. • Progetto Scolastico • Archivio Vintage Streetwear
   </footer>
-
   <script>
     function updateCartCount() {
       let cart = JSON.parse(localStorage.getItem('hypevault_cart')) || [];
       document.getElementById('cart-count').innerText = cart.length;
     }
-
-    function addToCart(name, price, btnElement) {
+    function addToCart(name, price, id) {
       let cart = JSON.parse(localStorage.getItem('hypevault_cart')) || [];
       cart.push({ name: name, price: price });
       localStorage.setItem('hypevault_cart', JSON.stringify(cart));
       updateCartCount();
-
-      btnElement.innerText = "✓ Aggiunto nel Vault!";
-      btnElement.style.background = "#00ff88";
-      btnElement.style.color = "#000";
-      setTimeout(() => {
-        btnElement.innerText = "Aggiungi al Carrello";
-        btnElement.style.background = "";
-        btnElement.style.color = "";
-      }, 1200);
+      document.getElementById("sold-" + id).style.display = "inline-block";
+      document.getElementById("msg-" + id).style.display = "block";
+      let btn = document.getElementById("btn-" + id);
+      btn.innerText = "✓ Aggiunto nel Vault!";
+      btn.style.background = "#00ff88";
+      btn.style.color = "#000";
     }
-
     updateCartCount();
   </script>
-
 </body>
 </html>
