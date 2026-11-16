@@ -114,7 +114,7 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
+    gap: 20px;
   }
   .card {
     background: #111;
@@ -128,11 +128,11 @@
   }
   .card:hover {
     border-color: #00ff88;
-    transform: translateY(-5px);
+    transform: translateY(-4px);
   }
   .card-img {
     position: relative;
-    height: 300px;
+    height: 280px;
     background: #1a1a1a;
   }
   .card-img img {
@@ -154,6 +154,7 @@
     border-radius: 6px;
   }
   .badge-sold {
+    display: none;
     position: absolute;
     top: 12px;
     right: 12px;
@@ -165,7 +166,7 @@
     border-radius: 6px;
   }
   .card-body {
-    padding: 20px;
+    padding: 18px;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -179,24 +180,24 @@
     margin-bottom: 6px;
   }
   .card-body h3 {
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 10px;
   }
   .price {
     color: #00ff88;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 800;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
   .add-btn {
     width: 100%;
-    padding: 12px;
+    padding: 11px;
     background: #1e1e1e;
     color: #fff;
     border: 1px solid #333;
     border-radius: 8px;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 12px;
     text-transform: uppercase;
     cursor: pointer;
     transition: 0.2s;
@@ -213,13 +214,14 @@
     cursor: not-allowed;
   }
   .restock-note {
-    font-size: 12px;
+    display: none;
+    font-size: 11px;
     color: #ff6b88;
     background: rgba(255, 42, 85, 0.1);
-    padding: 8px;
+    padding: 6px;
     border-radius: 6px;
-    border-left: 3px solid #ff2a55;
-    margin-top: 10px;
+    border-left: 2px solid #ff2a55;
+    margin-top: 8px;
   }
 
   /* Footer */
@@ -244,3 +246,107 @@
       <a href="hoodies.html" class="active">Hoodies</a>
       <a href="jackets.html">Jackets</a>
       <a href="bottoms.html">Bottoms</a>
+      <a href="cart.html">Cart 🛒 <span class="cart-pill" id="cart-count">0</span></a>
+    </div>
+  </nav>
+
+  <section class="category-header">
+    <div class="tag-era">Archive Collection</div>
+    <h1>HOODIES</h1>
+    <p>Felpe heavy-cotton con lavaggio vintage, boxy fit e grafiche sbiadite originali.</p>
+  </section>
+
+  <div class="main-wrap">
+    <div class="grid">
+
+      <!-- Prodotto 1 -->
+      <div class="card">
+        <div class="card-img">
+          <span class="badge-vintage">HEAVY 500GSM</span>
+          <span class="badge-sold" id="sold-1">SOLD OUT</span>
+          <img src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Boxy Faded Heavy Hoodie">
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="era-sub">Vintage Wash • Taglia L</div>
+            <h3>Boxy Faded Heavy Hoodie</h3>
+            <div class="price">125,00 €</div>
+          </div>
+          <div>
+            <button class="add-btn" id="btn-1" onclick="addToCart('Boxy Faded Heavy Hoodie', 125, 1)">Aggiungi al Carrello</button>
+            <div class="restock-note" id="msg-1">⏳ Venduto! Tornerà disponibile tra poco.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prodotto 2 -->
+      <div class="card">
+        <div class="card-img">
+          <span class="badge-vintage">ARCHIVE 2001</span>
+          <span class="badge-sold" id="sold-2">SOLD OUT</span>
+          <img src="https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Distressed Graphic Hoodie">
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="era-sub">Y2K Street • Taglia M</div>
+            <h3>Distressed Graphic Zip Hoodie</h3>
+            <div class="price">140,00 €</div>
+          </div>
+          <div>
+            <button class="add-btn" id="btn-2" onclick="addToCart('Distressed Graphic Zip Hoodie', 140, 2)">Aggiungi al Carrello</button>
+            <div class="restock-note" id="msg-2">⏳ Venduto! Tornerà disponibile tra poco.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prodotto 3 -->
+      <div class="card">
+        <div class="card-img">
+          <span class="badge-vintage">LIMITED 1 OF 1</span>
+          <span class="badge-sold" id="sold-3">SOLD OUT</span>
+          <img src="https://images.pexels.com/photos/6311652/pexels-photo-6311652.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vault Blank Hoodie">
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="era-sub">Raw Cotton • Taglia XL</div>
+            <h3>Vault Acid Wash Hoodie</h3>
+            <div class="price">130,00 €</div>
+          </div>
+          <div>
+            <button class="add-btn" id="btn-3" onclick="addToCart('Vault Acid Wash Hoodie', 130, 3)">Aggiungi al Carrello</button>
+            <div class="restock-note" id="msg-3">⏳ Venduto! Tornerà disponibile tra poco.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    © 2026 HypeVault, Inc. • Progetto Scolastico • Archivio Vintage Streetwear
+  </footer>
+
+  <script>
+    function updateCartCount() {
+      let cart = JSON.parse(localStorage.getItem('hypevault_cart')) || [];
+      document.getElementById('cart-count').innerText = cart.length;
+    }
+
+    function addToCart(name, price, id) {
+      let cart = JSON.parse(localStorage.getItem('hypevault_cart')) || [];
+      cart.push({ name: name, price: price });
+      localStorage.setItem('hypevault_cart', JSON.stringify(cart));
+      updateCartCount();
+
+      document.getElementById("sold-" + id).style.display = "inline-block";
+      document.getElementById("msg-" + id).style.display = "block";
+      let btn = document.getElementById("btn-" + id);
+      btn.innerText = "VENDUTO";
+      btn.disabled = true;
+    }
+
+    updateCartCount();
+  </script>
+
+</body>
+</html>
