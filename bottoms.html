@@ -3,79 +3,261 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HYPEVAULT | Bottoms</title>
+<title>HYPEVAULT | Bottoms Archive</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
-body{background:linear-gradient(180deg, #8c8c8c 0%, #4a4a4a 35%, #181818 100%);color:white;min-height:100vh;}
-header{position:fixed;width:100%;top:0;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;backdrop-filter:blur(20px);background:rgba(0,0,0,0.4);border-bottom:1px solid rgba(255,255,255,0.1);z-index:100;}
-header h2 a{font-size:26px;letter-spacing:2px;color:white;text-decoration:none;}
-nav{display:flex;gap:18px;flex-wrap:wrap;}
-nav a{text-decoration:none;color:white;font-weight:bold;font-size:15px;transition:0.3s;}
-nav a:hover, nav a.active{color:#ccc;text-decoration:underline;}
-.products{padding:130px 8% 100px;}
-.products h1{font-size:45px;margin-bottom:10px;letter-spacing:3px;}
-.products p.sub{color:#ddd;margin-bottom:40px;}
-.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:25px;}
-.card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:18px;padding:22px;text-align:center;backdrop-filter:blur(10px);transition:0.3s;}
-.card:hover{transform:translateY(-8px);background:rgba(255,255,255,0.12);}
-.card-img{width:100%;height:220px;background:#222;border-radius:12px;margin-bottom:18px;display:flex;justify-content:center;align-items:center;color:#777;font-weight:bold;}
-.card h3{font-size:20px;margin-bottom:8px;}
-.card p{color:#ccc;font-size:18px;font-weight:bold;margin-bottom:15px;}
-.add-btn{padding:10px 22px;background:white;color:black;border:none;border-radius:25px;font-weight:bold;cursor:pointer;transition:0.3s;width:100%;}
-.add-btn:hover{background:#ddd;}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #070707;
+    color: #f5f5f5;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+
+  /* Barra superiore */
+  .top-strip {
+    background: #00ff88;
+    color: #000;
+    text-align: center;
+    padding: 6px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Navigazione identica alla Home */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: rgba(12, 12, 12, 0.95);
+    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #fff;
+    text-decoration: none;
+  }
+  .logo span { color: #00ff88; }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: #00ff88;
+  }
+  .cart-pill {
+    background: #00ff88;
+    color: #000;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 900;
+  }
+
+  /* Intestazione categoria */
+  .category-header {
+    padding: 60px 20px 40px;
+    text-align: center;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #070707 75%);
+    border-bottom: 1px solid #222;
+  }
+  .tag-era {
+    display: inline-block;
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .category-header h1 {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .category-header p {
+    color: #999;
+    max-width: 500px;
+    margin: 0 auto;
+    font-size: 15px;
+  }
+
+  /* Griglia Prodotti */
+  .main-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px 80px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .card {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.3s;
+  }
+  .card:hover {
+    border-color: #00ff88;
+    transform: translateY(-5px);
+  }
+  .card-img {
+    position: relative;
+    height: 300px;
+    background: #1a1a1a;
+  }
+  .card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .badge-vintage {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(10, 10, 10, 0.85);
+    color: #00ff88;
+    border: 1px solid rgba(0, 255, 136, 0.4);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+  .badge-sold {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #ff2a55;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 900;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+  .card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+  }
+  .era-sub {
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .card-body h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .price {
+    color: #00ff88;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .add-btn {
+    width: 100%;
+    padding: 12px;
+    background: #1e1e1e;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .add-btn:hover:not(:disabled) {
+    background: #00ff88;
+    color: #000;
+    border-color: #00ff88;
+  }
+  .add-btn:disabled {
+    background: #181818;
+    color: #666;
+    border-color: #222;
+    cursor: not-allowed;
+  }
+  .restock-note {
+    font-size: 12px;
+    color: #ff6b88;
+    background: rgba(255, 42, 85, 0.1);
+    padding: 8px;
+    border-radius: 6px;
+    border-left: 3px solid #ff2a55;
+    margin-top: 10px;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid #222;
+    background: #0b0b0b;
+    padding: 40px 20px;
+    text-align: center;
+    color: #666;
+    font-size: 12px;
+  }
 </style>
 </head>
 <body>
 
-<header>
-  <h2><a href="index.html">HYPEVAULT</a></h2>
+  <div class="top-strip">Archivio Vintage • Pezzi Unici 90s & Y2K</div>
+
   <nav>
-    <a href="index.html">Home</a>
-    <a href="hoodies.html">Hoodies</a>
-    <a href="jackets.html">Jackets</a>
-    <a href="bottoms.html" class="active">Bottoms</a>
-    <a href="cart.html" id="cartLink">Cart (0)</a>
+    <a href="index.html" class="logo">HYPE<span>VAULT</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="hoodies.html">Hoodies</a>
+      <a href="jackets.html">Jackets</a>
+      <a href="bottoms.html" class="active">Bottoms</a>
+      <a href="cart.html">Cart 🛒 <span class="cart-pill" id="cart-count">0</span></a>
+    </div>
   </nav>
-</header>
 
-<section class="products">
-  <h1>BOTTOMS</h1>
-  <p class="sub">Cargo multi-tasca, denim baggy e sweatpants.</p>
-  <div class="grid">
-    <div class="card">
-      <div class="card-img">BOTTOM 01</div>
-      <h3>Heavy Cargo Pants</h3>
-      <p>€ 210</p>
-      <button class="add-btn" onclick="addToCart('Heavy Cargo Pants', 210)">Aggiungi al Carrello</button>
-    </div>
-    <div class="card">
-      <div class="card-img">BOTTOM 02</div>
-      <h3>Distressed Baggy Denim</h3>
-      <p>€ 230</p>
-      <button class="add-btn" onclick="addToCart('Distressed Baggy Denim', 230)">Aggiungi al Carrello</button>
-    </div>
-    <div class="card">
-      <div class="card-img">BOTTOM 03</div>
-      <h3>Vault Wide Sweatpants</h3>
-      <p>€ 150</p>
-      <button class="add-btn" onclick="addToCart('Vault Wide Sweatpants', 150)">Aggiungi al Carrello</button>
-    </div>
-  </div>
-</section>
+  <section class="category-header">
+    <div class="tag-era">Archive Collection</div>
+    <h1>BOTTOMS</h1>
+    <p>Cargo multi-tasca, denim baggy anni '90 e track pants vintage selezionati.</p>
+  </section>
 
-<script>
-  function updateCartCount() {
-    let cart = JSON.parse(localStorage.getItem('hypevault_cart')) || [];
-    document.getElementById('cartLink').innerText = 'Cart (' + cart.length + ')';
-  }
-  function addToCart(name, price) {
-    let cart = JSON.parse(localStorage.getItem('hypevault_cart')) || [];
-    cart.push({ name: name, price: price });
-    localStorage.setItem('hypevault_cart', JSON.stringify(cart));
-    updateCartCount();
-    alert(name + ' aggiunto al carrello!');
-  }
-  updateCartCount();
-</script>
-</body>
-</html>
+  <div class="main-wrap">
+    <div class="grid">
+
+      <!-- Prodotto 1 -->
+      <div class="card">
+        <div class="card-img">
+          <span class="badge-vintage">1 OF 1
