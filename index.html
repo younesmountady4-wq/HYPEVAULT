@@ -6,54 +6,146 @@
 <title>HYPEVAULT | Home</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #070707; color: #fff; font-family: Arial, sans-serif; overflow-x: hidden; }
+  body { background: #070707; color: #fff; font-family: Arial, sans-serif; }
   
-  /* Banner Promozionale in alto */
+  /* Banner Promozionale in alto con le richieste esatte */
   .promo-banner {
     background: #00ff88;
     color: #000;
     text-align: center;
-    padding: 8px;
+    padding: 10px;
     font-size: 13px;
     font-weight: 900;
     letter-spacing: 1px;
     text-transform: uppercase;
   }
 
-  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: #111; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: #111; border-bottom: 1px solid #222; }
   .logo { font-size: 24px; font-weight: 900; color: #fff; text-decoration: none; }
   .logo span { color: #00ff88; }
   .nav-links a { color: #ccc; text-decoration: none; margin-left: 20px; font-weight: bold; font-size: 14px; text-transform: uppercase; }
   .nav-links a:hover { color: #00ff88; }
   
-  /* Sezione Hero Vault con atmosfera caveau */
-  .hero {
-    position: relative;
-    text-align: center;
-    padding: 90px 20px;
-    background: linear-gradient(rgba(7, 7, 7, 0.85), rgba(7, 7, 7, 0.92)), 
-                url('https://images.pexels.com/photos/259200/pexels-photo-259200.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover no-repeat;
-    border-bottom: 2px solid #00ff88;
-    margin-bottom: 40px;
-  }
-  .hero h1 { font-size: 52px; color: #00ff88; margin-bottom: 10px; font-weight: 900; letter-spacing: 4px; text-shadow: 0 0 20px rgba(0,255,136,0.4); }
-  .hero p { color: #bbb; font-size: 16px; margin-bottom: 15px; }
+  .hero { text-align: center; padding: 60px 20px; }
+  .hero h1 { font-size: 48px; color: #00ff88; margin-bottom: 10px; font-weight: 900; letter-spacing: 3px; }
+  .hero p { color: #aaa; font-size: 16px; margin-bottom: 20px; }
   
-  /* Evidenziazione promo e lingotti */
+  /* Box promo prezzi al 50% */
   .promo-box {
     background: rgba(0, 255, 136, 0.1);
-    border: 1px solid #00ff88;
-    max-width: 650px;
+    border: 1px dashed #00ff88;
+    max-width: 600px;
     margin: 0 auto 30px;
-    padding: 15px;
+    padding: 18px;
     border-radius: 8px;
     color: #00ff88;
     font-weight: bold;
     font-size: 15px;
-    letter-spacing: 0.5px;
-    box-shadow: inset 0 0 15px rgba(0,255,136,0.15);
   }
 
   /* Form Iscrizione Email */
   .sub-container {
-    max
+    max-width: 450px;
+    margin: 0 auto;
+    background: #111;
+    padding: 30px;
+    border: 1px solid #222;
+    border-radius: 12px;
+  }
+  .sub-container h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+  }
+  .sub-form { display: flex; gap: 10px; }
+  .sub-form input {
+    flex: 1;
+    padding: 12px;
+    background: #070707;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #fff;
+    outline: none;
+  }
+  .sub-form input:focus { border-color: #00ff88; }
+  .btn-sub {
+    padding: 12px 20px;
+    background: #00ff88;
+    color: #000;
+    font-weight: 900;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  .btn-sub:hover { background: #00cc6a; }
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    font-size: 12px;
+    border-top: 1px solid #222;
+    margin-top: 60px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- BANNER RICHIESTO: Spedizione gratis fino al 02/02/2027 e prezzi al 50% -->
+  <div class="promo-banner">
+    🚀 Spedizione Gratuita su tutto il sito fino al 02/02/2027 • Tutti i capi sono al 50% OFF!
+  </div>
+
+  <nav>
+    <a href="index.html" class="logo">HYPE<span>VAULT</span></a>
+    <div class="nav-links">
+      <a href="index.html" style="color:#00ff88;">Home</a>
+      <a href="hoodies.html">Hoodies</a>
+      <a href="jackets.html">Jackets</a>
+      <a href="bottoms.html">Bottoms</a>
+      <a href="cart.html">Cart</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>HYPEVAULT ARCHIVE</h1>
+    <p>Il tuo portale streetwear & vintage per il progetto scolastico.</p>
+    
+    <div class="promo-box">
+      🔥 SALDI STRAORDINARI: Listino prezzi ribassato al -50% su ogni articolo dell'archivio!
+    </div>
+
+    <!-- SEZIONE ISCRIZIONE EMAIL -->
+    <div class="sub-container" id="box-form">
+      <h3>Accedi ai Drop Esclusivi</h3>
+      <p style="color:#888; font-size:13px; margin-bottom:15px;">Iscriviti con la tua email per rimanere aggiornato sulle novità.</p>
+      <div class="sub-form">
+        <input type="email" id="email-in" placeholder="Inserisci la tua email...">
+        <button class="btn-sub" onclick="iscrivi()">Iscriviti</button>
+      </div>
+    </div>
+    
+    <p id="ok-msg" style="display:none; color:#00ff88; font-weight:bold; margin-top:20px; font-size:16px;">✅ Iscrizione completata! Benvenuto nel Vault.</p>
+  </div>
+
+  <footer>
+    © 2026 HypeVault • Progetto Scolastico
+  </footer>
+
+  <script>
+    function iscrivi() {
+      let email = document.getElementById("email-in").value;
+      if (email.includes("@") && email.includes(".")) {
+        document.getElementById("box-form").style.display = "none";
+        document.getElementById("ok-msg").style.display = "block";
+      } else {
+        alert("Inserisci un indirizzo email valido!");
+      }
+    }
+  </script>
+
+</body>
+</html>
