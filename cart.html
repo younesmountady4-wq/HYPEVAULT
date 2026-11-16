@@ -5,93 +5,195 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HYPEVAULT | Cart</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
-body{background:linear-gradient(180deg, #8c8c8c 0%, #4a4a4a 35%, #181818 100%);color:white;min-height:100vh;}
-header{position:fixed;width:100%;top:0;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;backdrop-filter:blur(20px);background:rgba(0,0,0,0.4);border-bottom:1px solid rgba(255,255,255,0.1);z-index:100;}
-header h2 a{font-size:26px;letter-spacing:2px;color:white;text-decoration:none;}
-nav{display:flex;gap:18px;flex-wrap:wrap;}
-nav a{text-decoration:none;color:white;font-weight:bold;font-size:15px;transition:0.3s;}
-nav a:hover, nav a.active{color:#ccc;text-decoration:underline;}
-.cart-section{padding:130px 8% 100px;max-width:800px;margin:0 auto;}
-.cart-section h1{font-size:45px;margin-bottom:30px;letter-spacing:3px;}
-.cart-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:18px 25px;border-radius:14px;margin-bottom:15px;}
-.remove-btn{background:#ff4d4d;color:white;border:none;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:bold;}
-.total-box{margin-top:30px;padding:25px;background:rgba(0,0,0,0.4);border-radius:16px;text-align:right;}
-.total-box h2{font-size:28px;margin-bottom:20px;}
-.checkout-btn{padding:16px 40px;background:white;color:black;border:none;border-radius:30px;font-weight:bold;font-size:16px;cursor:pointer;transition:0.3s;}
-.checkout-btn:hover{box-shadow:0 0 25px white;}
-.empty-msg{color:#ccc;font-size:18px;margin-bottom:20px;}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #070707;
+    color: #f5f5f5;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* Barra superiore */
+  .top-strip {
+    background: #00ff88;
+    color: #000;
+    text-align: center;
+    padding: 6px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Navigazione coerente con il resto del sito */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: rgba(12, 12, 12, 0.95);
+    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #fff;
+    text-decoration: none;
+  }
+  .logo span { color: #00ff88; }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: #00ff88;
+  }
+  .cart-pill {
+    background: #00ff88;
+    color: #000;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 900;
+  }
+
+  /* Sezione Carrello */
+  .cart-section {
+    padding: 60px 20px 100px;
+    max-width: 850px;
+    margin: 0 auto;
+  }
+  .cart-section h1 {
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    border-left: 4px solid #00ff88;
+    padding-left: 14px;
+  }
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111;
+    border: 1px solid #222;
+    padding: 20px 25px;
+    border-radius: 14px;
+    margin-bottom: 15px;
+    transition: 0.2s;
+  }
+  .cart-item:hover {
+    border-color: #333;
+  }
+  .cart-item h3 {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  .remove-btn {
+    background: rgba(255, 42, 85, 0.15);
+    color: #ff2a55;
+    border: 1px solid rgba(255, 42, 85, 0.3);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    transition: 0.2s;
+  }
+  .remove-btn:hover {
+    background: #ff2a55;
+    color: #fff;
+  }
+
+  .total-box {
+    margin-top: 35px;
+    padding: 30px;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 16px;
+    text-align: right;
+  }
+  .total-box h2 {
+    font-size: 26px;
+    margin-bottom: 24px;
+    color: #00ff88;
+  }
+  .checkout-btn {
+    padding: 14px 36px;
+    background: #00ff88;
+    color: #000;
+    border: none;
+    border-radius: 30px;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+  }
+  .checkout-btn:hover {
+    background: #00cc6a;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+  }
+  .empty-msg {
+    color: #888;
+    font-size: 16px;
+    margin-bottom: 20px;
+    background: #111;
+    padding: 30px;
+    border-radius: 14px;
+    border: 1px solid #222;
+    text-align: center;
+  }
+
+  footer {
+    border-top: 1px solid #222;
+    background: #0b0b0b;
+    padding: 40px 20px;
+    text-align: center;
+    color: #666;
+    font-size: 12px;
+    margin-top: 80px;
+  }
 </style>
 </head>
 <body>
 
-<header>
-  <h2><a href="index.html">HYPEVAULT</a></h2>
+  <div class="top-strip">Il tuo caveau personale • Checkout sicuro HypeVault</div>
+
   <nav>
-    <a href="index.html">Home</a>
-    <a href="hoodies.html">Hoodies</a>
-    <a href="jackets.html">Jackets</a>
-    <a href="bottoms.html">Bottoms</a>
-    <a href="cart.html" class="active" id="cartLink">Cart (0)</a>
+    <a href="index.html" class="logo">HYPE<span>VAULT</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="hoodies.html">Hoodies</a>
+      <a href="jackets.html">Jackets</a>
+      <a href="bottoms.html">Bottoms</a>
+      <a href="cart.html" class="active">Cart 🛒 <span class="cart-pill" id="cartLink">0</span></a>
+    </div>
   </nav>
-</header>
 
-<section class="cart-section">
-  <h1>IL TUO VAULT</h1>
-  <div id="cartItems"></div>
-  <div class="total-box" id="totalBox" style="display:none;">
-    <h2 id="totalPrice">Totale: € 0</h2>
-    <button class="checkout-btn" onclick="checkout()">PROCEDI AL CHECKOUT</button>
-  </div>
-</section>
-
-<script>
-  function renderCart() {
-    let cart = JSON.parse(localStorage.getItem('hypevault_cart')) || [];
-    document.getElementById('cartLink').innerText = 'Cart (' + cart.length + ')';
-    const container = document.getElementById('cartItems');
-    const totalBox = document.getElementById('totalBox');
-
-    if (cart.length === 0) {
-      container.innerHTML = '<p class="empty-msg">Il tuo carrello è vuoto. Esplora le collezioni per aggiungere capi.</p>';
-      totalBox.style.display = 'none';
-      return;
-    }
-
-    let html = '';
-    let total = 0;
-    cart.forEach((item, index) => {
-      total += item.price;
-      html += `
-        <div class="cart-item">
-          <div>
-            <h3>${item.name}</h3>
-            <p style="color:#ccc;margin-top:4px;">€ ${item.price}</p>
-          </div>
-          <button class="remove-btn" onclick="removeItem(${index})">Rimuovi</button>
-        </div>
-      `;
-    });
-
-    container.innerHTML = html;
-    document.getElementById('totalPrice').innerText = 'Totale: € ' + total;
-    totalBox.style.display = 'block';
-  }
-
-  function removeItem(index) {
-    let cart = JSON.parse(localStorage.getItem('hypevault_cart')) || [];
-    cart.splice(index, 1);
-    localStorage.setItem('hypevault_cart', JSON.stringify(cart));
-    renderCart();
-  }
-
-  function checkout() {
-    alert('Ordine confermato! Grazie per aver acquistato su HYPEVAULT.');
-    localStorage.removeItem('hypevault_cart');
-    renderCart();
-  }
-
-  renderCart();
-</script>
-</body>
-</html>
+  <section class="cart-section">
+    <h1>IL TUO VAULT</h1>
+    <div id="cartItems"></div>
+    <div class="total-box" id="totalBox" style="display:none;">
+      <h2 id="totalPrice">Totale: € 0</h2>
+      <button class="checkout-btn" onclick="checkout()">PROCEDI AL CHECKOUT</button>
+    </div>
+  </section>
