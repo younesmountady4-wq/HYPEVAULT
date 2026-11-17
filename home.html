@@ -3,526 +3,154 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HYPEVAULT | Enter The Vault</title>
+<title>HYPEVAULT | Home</title>
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    background: #080808;
-    color: white;
-    overflow-x: hidden;
-  }
-
-  /* NAVBAR */
-  header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 18px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(8, 8, 8, 0.88);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    z-index: 1000;
-  }
-
-  .logo {
-    font-size: 26px;
-    font-weight: 900;
-    letter-spacing: 4px;
-    text-decoration: none;
-    background: linear-gradient(45deg, #ffffff, #d8d8d8, #ffffff, #bdbdbd, #ffffff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .logo span {
-    -webkit-text-fill-color: #00ff88;
-  }
-
-  nav {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-
-  nav a {
-    color: #ddd;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    transition: 0.3s;
-  }
-
-  nav a:hover, nav a.active {
-    color: #00ff88;
-  }
-
-  .cart-badge {
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #070707; color: #fff; font-family: 'Segoe UI', Arial, sans-serif; overflow-x: hidden; }
+  
+  /* Banner Promozionale in alto */
+  .promo-banner {
     background: #00ff88;
     color: #000;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 900;
-    margin-left: 4px;
-  }
-
-  /* HERO + CASSAFORTE */
-  .hero {
-    min-height: 100vh;
-    padding: 110px 20px 60px;
-    background:
-      radial-gradient(circle at center, rgba(0, 255, 136, 0.08) 0%, transparent 60%),
-      linear-gradient(rgba(0, 0, 0, 0.6), rgba(8, 8, 8, 0.95)),
-      linear-gradient(135deg, #5a5a5a, #2c2c2c, #111111);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
+  /* Navigazione */
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: #111; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
+  .logo { font-size: 24px; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: 2px; }
+  .logo span { color: #00ff88; }
+  .nav-links a { color: #ccc; text-decoration: none; margin-left: 20px; font-weight: bold; font-size: 14px; text-transform: uppercase; }
+  .nav-links a:hover, .nav-links a.active { color: #00ff88; }
+  
+  .hero { text-align: center; padding: 50px 20px; }
+  .hero h1 { font-size: 48px; color: #00ff88; margin-bottom: 10px; font-weight: 900; letter-spacing: 3px; }
+  .hero p { color: #aaa; font-size: 16px; margin-bottom: 20px; }
+  
+  /* Animazione Vault Door */
   .vault {
     width: 280px;
     height: 280px;
+    margin: 30px auto 10px auto;
     border-radius: 50%;
-    background: radial-gradient(circle, #a9a9a9, #6f6f6f, #262626);
-    border: 10px solid #d6d6d6;
     position: relative;
+    border: 10px solid #00ff88;
+    background: #111;
+    box-shadow: 0 0 40px #00ff88, 0 0 100px rgba(0, 255, 136, 0.3);
     cursor: pointer;
-    box-shadow:
-      0 0 40px rgba(255, 255, 255, 0.2),
-      inset 0 0 50px rgba(0, 0, 0, 0.8);
-    animation: pulse 4s infinite;
-    transition: border-color 0.5s, box-shadow 0.5s;
+    transition: transform 1s ease, box-shadow 0.4s ease;
   }
-
-  .vault:hover, .vault.unlocked {
-    border-color: #00ff88;
-    box-shadow:
-      0 0 55px rgba(0, 255, 136, 0.5),
-      inset 0 0 40px rgba(0, 0, 0, 0.8);
+  .vault:hover {
+    box-shadow: 0 0 60px #00ff88, 0 0 120px rgba(0, 255, 136, 0.5);
   }
-
-  /* Bulloni perimetrali della cassaforte */
-  .vault::before {
-    content: "";
+  .vault.unlocked {
+    transform: rotate(360deg);
+    border-color: #fff;
+  }
+  .vault-ring {
     position: absolute;
-    inset: 12px;
+    inset: 15px;
     border-radius: 50%;
-    border: 3px dashed rgba(255, 255, 255, 0.45);
+    border: 3px dashed rgba(255, 255, 255, 0.3);
   }
-
-  .wheel {
+  .vault-center {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 115px;
-    height: 115px;
-    border-radius: 50%;
-    border: 6px solid white;
-    background: rgba(20, 20, 20, 0.6);
-    animation: spin 8s linear infinite;
+    font-size: 40px;
+    user-select: none;
   }
 
-  .vault.unlocked .wheel {
-    animation: spin 1.2s linear infinite;
-    border-color: #00ff88;
-  }
+  /* Lookbook Section */
+  .lookbook-sec { padding: 40px 20px; max-width: 1000px; margin: 0 auto; text-align: center; }
+  .lookbook-sec h2 { font-size: 26px; margin-bottom: 20px; color: #00ff88; text-transform: uppercase; letter-spacing: 2px; }
+  .look-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .look-grid img { width: 100%; height: 350px; object-fit: cover; border-radius: 12px; border: 1px solid #222; }
 
-  .wheel::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 8px;
-    width: 8px;
-    height: 88px;
-    background: white;
-    transform: translateX(-50%);
-  }
-
-  .wheel::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 8px;
-    width: 88px;
-    height: 8px;
-    background: white;
-    transform: translateY(-50%);
-  }
-
-  .title {
-    margin-top: 32px;
-    font-size: clamp(44px, 8vw, 82px);
-    font-weight: 900;
-    letter-spacing: 6px;
-    background: linear-gradient(45deg, #ffffff, #d9d9d9, #ffffff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .subtitle {
-    margin-top: 12px;
-    font-size: 16px;
-    letter-spacing: 4px;
-    color: #cccccc;
-    text-transform: uppercase;
-  }
-
-  .btn {
-    display: inline-block;
-    margin-top: 32px;
-    padding: 16px 40px;
-    background: #00ff88;
-    color: #000;
-    text-decoration: none;
-    font-weight: 900;
-    font-size: 14px;
-    letter-spacing: 2px;
-    border-radius: 40px;
-    transition: 0.3s;
-    cursor: pointer;
-    border: none;
-  }
-
-  .btn:hover {
-    transform: scale(1.07);
-    box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
-  }
-
-  /* SEZIONE LOOKBOOK / ARCHIVE */
-  .lookbook-sec {
-    padding: 80px 8% 20px;
-    background: #080808;
-  }
-
-  .sec-header {
-    text-align: center;
-    margin-bottom: 45px;
-  }
-
-  .sec-tag {
-    color: #00ff88;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-  }
-
-  .sec-header h2 {
-    font-size: clamp(30px, 5vw, 46px);
-    font-weight: 900;
-    letter-spacing: 2px;
-    margin-top: 8px;
-    text-transform: uppercase;
-  }
-
-  .look-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-  }
-
-  .look-box {
-    position: relative;
-    height: 360px;
-    border-radius: 18px;
-    overflow: hidden;
+  /* Form Iscrizione Email */
+  .sub-container {
+    max-width: 450px;
+    margin: 40px auto;
+    background: #111;
+    padding: 30px;
     border: 1px solid #222;
+    border-radius: 12px;
   }
-
-  .look-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: 0.5s;
-  }
-
-  .look-box:hover img {
-    transform: scale(1.06);
-  }
-
-  .look-tag {
-    position: absolute;
-    bottom: 16px;
-    left: 16px;
-    background: rgba(0, 0, 0, 0.85);
-    border: 1px solid rgba(0, 255, 136, 0.4);
-    color: #00ff88;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 1px;
-  }
-
-  /* PRODUCTS */
-  .products {
-    padding: 90px 8% 100px;
-    background: #080808;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 28px;
-  }
-
-  .card {
-    background: #131313;
-    border: 1px solid #222;
-    border-radius: 20px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: 0.35s;
-  }
-
-  .card:hover {
-    transform: translateY(-8px);
-    border-color: #00ff88;
-    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.18);
-  }
-
-  .card-img-wrap {
-    position: relative;
-    height: 250px;
-    background: #1c1c1c;
-  }
-
-  .card-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .badge-top {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: #00ff88;
-    color: #000;
-    font-size: 11px;
-    font-weight: 900;
-    padding: 4px 10px;
-    border-radius: 6px;
-    letter-spacing: 1px;
-  }
-
-  .badge-sold {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: #ff2a55;
-    color: #fff;
-    font-size: 11px;
-    font-weight: 900;
-    padding: 4px 10px;
-    border-radius: 6px;
-  }
-
-  .card-content {
-    padding: 22px;
-  }
-
-  .card-sub {
-    font-size: 11px;
-    color: #888;
+  .sub-container h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 6px;
-  }
-
-  .card-content h3 {
-    font-size: 19px;
-    margin-bottom: 8px;
-  }
-
-  .price {
-    color: #00ff88;
-    font-size: 22px;
-    font-weight: 900;
-    margin-bottom: 16px;
-  }
-
-  .add-btn {
-    width: 100%;
-    padding: 12px;
-    background: #1f1f1f;
     color: #fff;
-    border: 1px solid #333;
-    border-radius: 10px;
-    font-weight: 800;
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: 0.25s;
   }
-
-  .add-btn:hover:not(:disabled) {
-    background: #00ff88;
-    color: #000;
-    border-color: #00ff88;
-  }
-
-  .add-btn:disabled {
-    background: #161616;
-    color: #555;
-    border-color: #222;
-    cursor: not-allowed;
-  }
-
-  /* NEWSLETTER VAULT */
-  .newsletter {
-    margin: 0 8% 80px;
-    padding: 50px 25px;
-    background: linear-gradient(135deg, #151515, #0d0d0d);
-    border: 1px solid #262626;
-    border-radius: 24px;
-    text-align: center;
-  }
-
-  .newsletter h3 {
-    font-size: 28px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-  }
-
-  .newsletter p {
-    color: #999;
-    margin-bottom: 24px;
-    font-size: 14px;
-  }
-
-  .news-form {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    max-width: 440px;
-    margin: 0 auto;
-    flex-wrap: wrap;
-  }
-
-  .news-form input {
+  .sub-form { display: flex; gap: 10px; }
+  .sub-form input {
     flex: 1;
-    min-width: 220px;
-    padding: 14px 18px;
-    background: #080808;
+    padding: 12px;
+    background: #070707;
     border: 1px solid #333;
-    border-radius: 30px;
+    border-radius: 6px;
     color: #fff;
     outline: none;
   }
-
-  .news-form input:focus {
-    border-color: #00ff88;
-  }
-
-  .news-form button {
-    padding: 14px 26px;
+  .sub-form input:focus { border-color: #00ff88; }
+  .btn-sub {
+    padding: 12px 20px;
     background: #00ff88;
     color: #000;
-    border: none;
-    border-radius: 30px;
     font-weight: 900;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
     text-transform: uppercase;
   }
+  .btn-sub:hover { background: #00cc6a; }
 
-  /* FOOTER */
   footer {
-    padding: 50px 20px;
-    background: #040404;
-    border-top: 1px solid #1a1a1a;
     text-align: center;
-  }
-
-  footer h3 {
-    font-size: 22px;
-    letter-spacing: 4px;
-    margin-bottom: 8px;
-  }
-
-  footer p {
-    color: #00ff88;
+    padding: 30px;
+    color: #666;
     font-size: 12px;
-    letter-spacing: 3px;
-    margin-bottom: 14px;
-  }
-
-  footer small {
-    color: #555;
-    font-size: 12px;
-  }
-
-  @keyframes spin {
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-  }
-
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.03); }
-    100% { transform: scale(1); }
+    border-top: 1px solid #222;
+    margin-top: 60px;
   }
 </style>
 </head>
 <body>
 
-<header>
-  <a href="index.html" class="logo">HYPE<span>VAULT</span></a>
+  <!-- Banner Spedizione Gratuita e Sconto 50% -->
+  <div class="promo-banner">
+    🚀 Spedizione Gratuita su tutto il sito fino al 02/02/2027 • Tutti i capi sono al 50% OFF!
+  </div>
+
   <nav>
-    <a href="index.html" class="active">Home</a>
-    <a href="hoodies.html">Hoodies</a>
-    <a href="jackets.html">Jackets</a>
-    <a href="bottoms.html">Bottoms</a>
-    <a href="cart.html">Cart 🛒 <span class="cart-badge" id="cart-count">0</span></a>
+    <a href="index.html" class="logo">HYPE<span>VAULT</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="active" style="color:#00ff88;">Home</a>
+      <a href="hoodies.html">Hoodies</a>
+      <a href="jackets.html">Jackets</a>
+      <a href="bottoms.html">Bottoms</a>
+      <a href="cart.html">Cart</a>
+    </div>
   </nav>
-</header>
 
-<section class="hero">
-  <div class="vault" id="vaultDoor" onclick="unlockVault()" title="Clicca per aprire la cassaforte">
-    <div class="wheel"></div>
-  </div>
-
-  <h1 class="title">HYPEVAULT</h1>
-  <p class="subtitle">ENTER THE VAULT. OWN THE HYPE.</p>
-
-  <button class="btn" onclick="unlockVault()">ENTER THE VAULT</button>
-</section>
-
-<!-- LOOKBOOK -->
-<section class="lookbook-sec">
-  <div class="sec-header">
-    <span class="sec-tag">Curated Streetwear</span>
-    <h2>Vault Lookbook</h2>
-  </div>
-  <div class="look-grid">
-    <div class="look-box">
-      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800" alt="Look 1">
-      <span class="look-tag">01 • VINTAGE ARCHIVE</span>
+  <div class="hero">
+    <h1>HYPEVAULT ARCHIVE</h1>
+    <p>Il tuo portale streetwear & vintage per il progetto scolastico.</p>
+    
+    <!-- Vault Door Interattivo -->
+    <div class="vault" id="vaultDoor" onclick="unlockVault()" title="Clicca per sbloccare">
+      <div class="vault-ring"></div>
+      <div class="vault-center" id="vaultIcon">🔒</div>
     </div>
-    <div class="look-box">
-      <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=800" alt="Look 2">
-      <span class="look-tag">02 • 90S STREET FIT</span>
-    </div>
-    <div class="look-box">
-      <img src="
+    <p style="font-size: 11px; color: #777; letter-spacing: 1px; margin-top: 8px;">CLICCA SULLA CASSAFORTE PER ACCEDERE AL VAULT</p>
+
+    <!-- Sezione Iscrizione Email -->
+    <div class="sub-container" id="box-form">
+      <h3>Accedi ai Drop Esclusivi</h3>
+      <p style="color:#888; font-size:13px; margin-bottom:15px;">Iscriviti con la tua email per rimanere aggiornato.</p>
